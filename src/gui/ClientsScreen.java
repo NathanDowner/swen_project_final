@@ -20,10 +20,10 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.border.TitledBorder;
 
-public class searchScreen extends JPanel {
+public class ClientsScreen extends JPanel {
 	private ArrayList<Client> clients;
 	private JTextField clientSearch;
-	private JList clientList;
+	private static JList clientList;
 	private String clientName;
 	private String clientID;
 	
@@ -31,7 +31,7 @@ public class searchScreen extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public searchScreen() {
+	public ClientsScreen() {
 		this.clients = Main.clientList;
 		setLayout(null);
 		
@@ -43,7 +43,7 @@ public class searchScreen extends JPanel {
 		clientList = new JList();
 		clientList.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
-				Main.setClientViewText(((Client)clientList.getSelectedValue()).toString());
+				Main.setClientViewText(((Client)clientList.getSelectedValue()).toString2());
 			}
 		});
 		clientList.setBounds(0, 0, 100, 100);
@@ -87,12 +87,12 @@ public class searchScreen extends JPanel {
 	}
 
 
-	private void loadClients(ArrayList<Client> list) {
+	public static void loadClients(ArrayList<Client> list) {
 		DefaultListModel dlm = new DefaultListModel();
 		for (Client c: list) {
 			dlm.addElement(c);
 		}
-		this.clientList.setModel(dlm);
+		clientList.setModel(dlm);
 	}
 
 
@@ -128,7 +128,7 @@ public class searchScreen extends JPanel {
 	public static ArrayList<Client> searchByClientName(String key){
 		ArrayList<Client> searchResults = new ArrayList<Client>();
 		for (Client cl: Main.clientList) {
-			if ((cl.getFname()+ " "+cl.getLname()).contains(key)) {
+			if (((cl.getFname()+ " "+cl.getLname()).toLowerCase()).contains(key.toLowerCase())) {
 				searchResults.add(cl);
 			}
 		}

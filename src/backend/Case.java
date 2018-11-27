@@ -3,6 +3,7 @@ import java.io.File;
 import java.util.*;
 
 public class Case {
+	private static int lastId = 0;
     private String caseId;
     private Date startDate;
     private ArrayList<String> status;
@@ -17,6 +18,11 @@ public class Case {
     private boolean inProgress;
 
     public Case() {
+    }
+    
+    
+    private static String getNextCaseId() {
+    	return String.format("%05d", ++lastId);
     }
 
     public String getCaseId() {

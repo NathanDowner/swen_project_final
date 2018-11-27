@@ -1,4 +1,4 @@
-
+package backend;
 
 /**
  *
@@ -21,6 +21,12 @@ public class Address {
         this.line2 = line2;
         this.country = country;
         this.zip = zip;
+    }
+    
+    public Address(AddressType type, String line1, String country) {
+    	this.type = type;
+    	this.line1 = line1;
+    	this.country = country;
     }
 
     public Address() {

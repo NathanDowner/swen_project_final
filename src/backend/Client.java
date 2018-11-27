@@ -6,7 +6,7 @@ import java.util.*;
  * 
  */
 public class Client {
-
+	private static int clientNo = 0;
     private String lname;
     private String clientId;
     private String fname;
@@ -16,8 +16,6 @@ public class Client {
     private String dob;
     private String birthPlace;
     private String nationality;
-    private String homeAdd;
-    private String mailAdd;
     private String homePhone;
     private String mobilePhone;
     private String workPhone;
@@ -25,7 +23,6 @@ public class Client {
     private String occupation;
     private String natureOfBus;
     private String nameOfBus;
-    private String busAddr;
     private String busPhone;
     private String busFax;
     private Enum idType;
@@ -37,9 +34,9 @@ public class Client {
     private ArrayList<Address> addresses;
     private ArrayList<Case> cases = new ArrayList<Case>();
 
-    public Client(String lname, String clientId, String fname, String mname, String alias, String motherMaiden, String dob, String birthPlace, String nationality, String homeAdd, String mailAdd, String homePhone, String mobilePhone, String workPhone, String email, String occupation, String natureOfBus, String nameOfBus, String busAddr, String busPhone, String busFax, Enum idType, String idNum, String idExp, String sourceOfFunds, String trn, String publicFunctionMem, ArrayList<Address> addresses) {
+    public Client(String lname, String fname, String mname, String alias, String motherMaiden, String dob, String birthPlace, String nationality, String homePhone, String mobilePhone, String workPhone, String email, String occupation, String natureOfBus, String nameOfBus, String busPhone, String busFax, Enum idType, String idNum, String idExp, String sourceOfFunds, String trn, String publicFunctionMem, ArrayList<Address> addresses) {
         this.lname = lname;
-        this.clientId = clientId;
+        this.clientId = getNextClientID();
         this.fname = fname;
         this.mname = mname;
         this.alias = alias;
@@ -47,8 +44,6 @@ public class Client {
         this.dob = dob;
         this.birthPlace = birthPlace;
         this.nationality = nationality;
-        this.homeAdd = homeAdd;
-        this.mailAdd = mailAdd;
         this.homePhone = homePhone;
         this.mobilePhone = mobilePhone;
         this.workPhone = workPhone;
@@ -56,7 +51,6 @@ public class Client {
         this.occupation = occupation;
         this.natureOfBus = natureOfBus;
         this.nameOfBus = nameOfBus;
-        this.busAddr = busAddr;
         this.busPhone = busPhone;
         this.busFax = busFax;
         this.idType = idType;
@@ -68,10 +62,23 @@ public class Client {
         this.addresses = addresses;
     }
     
+    public Client(String lname, String fname, String homePhone, String mobilePhone, String workPhone, String email, String occupation, ArrayList<Address> addresses) {
+        this.lname = lname;
+        this.clientId = getNextClientID();
+        this.fname = fname;
+        this.homePhone = homePhone;
+        this.mobilePhone = mobilePhone;
+        this.workPhone = workPhone;
+        this.email = email;
+        this.occupation = occupation;
+        this.addresses = addresses;
+    }
+    
     public Client() {
     }
     
     public Client (String fname, String lname) {
+    	this.clientId = getNextClientID();
     	this.fname = fname;
     	this.lname = lname;
     }
@@ -83,7 +90,11 @@ public class Client {
     public void setLname(String lname) {
         this.lname = lname;
     }
-
+    
+    private static String getNextClientID() {
+    	return String.format("%5d", ++clientNo);
+    }
+    
     public String getClientId() {
         return clientId;
     }
@@ -148,22 +159,6 @@ public class Client {
         this.nationality = nationality;
     }
 
-    public String getHomeAdd() {
-        return homeAdd;
-    }
-
-    public void setHomeAdd(String homeAdd) {
-        this.homeAdd = homeAdd;
-    }
-
-    public String getMailAdd() {
-        return mailAdd;
-    }
-
-    public void setMailAdd(String mailAdd) {
-        this.mailAdd = mailAdd;
-    }
-
     public String getHomePhone() {
         return homePhone;
     }
@@ -218,14 +213,6 @@ public class Client {
 
     public void setNameOfBus(String nameOfBus) {
         this.nameOfBus = nameOfBus;
-    }
-
-    public String getBusAddr() {
-        return busAddr;
-    }
-
-    public void setBusAddr(String busAddr) {
-        this.busAddr = busAddr;
     }
 
     public String getBusPhone() {
@@ -316,5 +303,23 @@ public class Client {
     @Override
     public String toString() {
         return getFullName();
+    }
+
+    public String toString2() {
+    	String text = "";
+    	
+        text = "Name:          " + fname + " " + lname + "\n" +
+                "ID:           " + clientId + "\n" +
+                //String.format("Address:      %s\n", addresses.get(0).toString()) +
+                "Homephone:    " + homePhone + "\n" +
+                "Mobilephone:  " + mobilePhone + "\n" +
+                "Workphone:    " + workPhone + "\n" +
+                "Email:        " + email + "\n" +
+                "Occupation:   " + occupation + "\n" +
+                "Cases:        ";
+        for (Case c: cases){
+        	text += c.getCaseId() + " ";
+        }
+        return text;
     }
 }

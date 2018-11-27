@@ -28,9 +28,10 @@ public class Main{
 		
 //		creating the tabbed pane
 		JTabbedPane tabbedMain = new JTabbedPane();
-		tabbedMain.addTab("Clients",new searchScreen());
+		tabbedMain.addTab("Clients",new ClientsScreen());
 		tabbedMain.addTab("Cases", new CasesScreen());
 		tabbedMain.addTab("Client View", clientViewTab);
+		tabbedMain.addTab("Add Client", new AddClientScreen());
 		//tabbedMain.addTab("Cases",new caseGui();
 		
 //		window = new searchScreen(clientList);
