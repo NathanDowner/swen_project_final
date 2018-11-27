@@ -92,7 +92,7 @@ public class Client {
     }
     
     private static String getNextClientID() {
-    	return String.format("%5d", ++clientNo);
+    	return String.format("%05d", ++clientNo);
     }
     
     public String getClientId() {

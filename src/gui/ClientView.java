@@ -39,36 +39,27 @@ public class ClientView extends JPanel {
 		add(lblClients);
 		
 		clientSearch = new JTextField();
-		clientSearch.setBounds(665, 171, 96, 19);
+		clientSearch.setBounds(743, 280, 96, 19);
 		add(clientSearch);
 		clientSearch.setColumns(10);
 		
 		JLabel lblEnterData = new JLabel("Enter Data:");
 		lblEnterData.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblEnterData.setBounds(539, 168, 82, 20);
+		lblEnterData.setBounds(602, 279, 82, 20);
 		add(lblEnterData);
-		//clientList.setVisibleRowCount(4);
-		
-		JButton searchBtn = new JButton("Search by CLIENT NAME");
-		searchBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-			}
-		});
-		searchBtn.setBounds(693, 292, 143, 21);
-		add(searchBtn);
-		
-		JButton button = new JButton("Search by CASE ID");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		button.setBounds(552, 292, 119, 21);
-		add(button);
 		txtpnClientData.setEditable(false);
 		
 		txtpnClientData.setBounds(28, 70, 487, 409);
 		add(txtpnClientData);
+		
+		JList clientHeadings = new JList();
+		clientHeadings.setBounds(540, 70, 122, 181);
+		add(clientHeadings);
+		
+//		ScrollPane scrollPane = new ScrollPane();
+//		scrollPane.setBounds(404, 165, 454, 309);
+//		scrollPane.add(clientHeadings);
+//		add(scrollPane);
 	}
 
 

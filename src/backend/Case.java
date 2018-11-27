@@ -1,3 +1,5 @@
+package backend;
+
 
 import java.io.File;
 import java.util.*;
@@ -19,7 +21,6 @@ public class Case {
 
     public Case() {
     }
-    
     
     private static String getNextCaseId() {
     	return String.format("%05d", ++lastId);
@@ -66,10 +67,12 @@ public class Case {
     }
     
     public double getCostToDate(){
-        double total = 0;
+        double total = 0.0;
         
-        
-        
+        for (Cost c: caseCosts) {
+        	total += c.getCost();
+        }
+        return total;
     }
     
    
@@ -116,7 +119,7 @@ public class Case {
     }
     
     public void addCaseFile(File caseFile){
-        caseFiles.add(caseFiles);
+        caseFiles.add(caseFile);
     }
 
     public Date getEndDate() {
