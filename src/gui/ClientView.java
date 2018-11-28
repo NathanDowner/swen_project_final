@@ -29,7 +29,7 @@ public class ClientView extends JPanel {
 	 */
 	public ClientView() {
 		setLayout(null);
-		
+		//TODO add close btn on client to remove the -1 index of the tab pane
 		JLabel lblClients = new JLabel("CLIENT VIEW");
 		lblClients.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblClients.setBounds(28, 10, 122, 37);

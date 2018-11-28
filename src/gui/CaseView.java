@@ -75,7 +75,7 @@ public class CaseView extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				JFrame stmtFrame = new JFrame("Statement of Accounts for "+ myCase.getClient().getFullName());
 				stmtFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				stmtFrame.setPreferredSize(new Dimension(450,350));
+				stmtFrame.setPreferredSize(new Dimension(400,550));
 				stmtFrame.getContentPane().add(new StatOfAccScreen(myCase.getCaseCostsStr(),myCase.getCostToDate()));
 				stmtFrame.pack();
 				stmtFrame.setVisible(true);

@@ -25,12 +25,12 @@ public class StatOfAccScreen extends JPanel {
 		
 		JLabel lblTotal = new JLabel("Total:");
 		lblTotal.setBounds(24, 345, 45, 13);
-		lblTotal.setText(Double.toString(total));
 		add(lblTotal);
 		
 		totalField = new JTextField();
 		totalField.setEditable(false);
 		totalField.setBounds(79, 342, 96, 19);
+		totalField.setText(Double.toString(total));
 		add(totalField);
 		totalField.setColumns(10);
 

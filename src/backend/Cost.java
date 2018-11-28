@@ -49,6 +49,6 @@ public class Cost {
 
     public String toString() {
         return getDateIncurredAsString()+
-                "  "+costName + "  "+ cost;
+                "\t"+costName + "\t"+ cost;
     }
 }
