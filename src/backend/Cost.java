@@ -1,4 +1,6 @@
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 /**
@@ -8,12 +10,13 @@ public class Cost {
 
     private String costName;
     private double cost;
-    private Date dateIncurred;
+    private LocalDateTime dateIncurred;
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
-    public Cost(String costName, double cost, Date dateIncurred) {
+    public Cost(String costName, double cost) {
         this.costName = costName;
         this.cost = cost;
-        this.dateIncurred = dateIncurred;
+        this.dateIncurred = LocalDateTime.now();
     }
 
     public Cost() {
@@ -21,6 +24,10 @@ public class Cost {
 
     public String getCostName() {
         return costName;
+    }
+    
+    public String getDateIncurredAsString() {
+    	return dtf.format(dateIncurred);
     }
 
     public void setCostName(String costName) {
@@ -35,19 +42,12 @@ public class Cost {
         this.cost = cost;
     }
 
-    public Date getDateIncurred() {
+    public LocalDateTime getDateIncurred() {
         return dateIncurred;
     }
 
-    public void setDateIncurred(Date dateIncurred) {
-        this.dateIncurred = dateIncurred;
-    }
-
     public String toString() {
-        return "Cost{" +
-                "costName='" + costName + '\'' +
-                ", cost=" + cost +
-                ", dateIncurred=" + dateIncurred +
-                '}';
+        return getDateIncurredAsString()+
+                "\t"+costName + "\t"+ cost;
     }
 }

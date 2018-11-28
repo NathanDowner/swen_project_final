@@ -1,8 +1,8 @@
 package backend;
 
 public enum CaseType {
-    Conveyancing ("Conveyancing",50_000.00),
-    Miscellaneous("Misc.",25_000.00),
+    Conveyancing("Conveyancing",50_000.00),
+    Misc("Misc",25_000.00),
     AdministrationAndEstate("Admin and Estate",60_000.00),
     Commercial("Commercial",120_000.00),
     Divorce("Divorce",65_000.00);
@@ -21,5 +21,13 @@ public enum CaseType {
 	
 	public double getBaseFee() {
 		return this.baseFee;
+	}
+	
+	public static CaseType strToType(String t) {
+		for (CaseType ct: CaseType.values()) {
+			if (t.equals(ct.getCaseType())) {
+				return ct;
+			}
+		} return CaseType.Misc;
 	}
 }

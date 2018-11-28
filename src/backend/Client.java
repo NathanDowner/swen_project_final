@@ -77,7 +77,14 @@ public class Client {
     public Client() {
     }
     
-    public Client (String fname, String lname) {
+    public Client (String fname, String lname, CaseType ct) {
+    	this.clientId = getNextClientID();
+    	this.fname = fname;
+    	this.lname = lname;
+    	addCase(new Case(this,ct));
+    }
+    
+    public Client(String fname, String lname) {
     	this.clientId = getNextClientID();
     	this.fname = fname;
     	this.lname = lname;
@@ -292,7 +299,7 @@ public class Client {
     }
 
     public String getFullName() {
-    	String ans = getLname() + ", " + getFname();
+    	String ans = this.lname + ", " + this.fname;
     	return ans;
     }
     

@@ -54,7 +54,12 @@ public class ClientView extends JPanel {
 		
 		JList clientHeadings = new JList();
 		clientHeadings.setBounds(540, 70, 122, 181);
+		clientHeadings.setLayoutOrientation(JList.VERTICAL);
 		add(clientHeadings);
+		
+		JButton btnAddCase = new JButton("Add Case");
+		btnAddCase.setBounds(540, 362, 85, 21);
+		add(btnAddCase);
 		
 //		ScrollPane scrollPane = new ScrollPane();
 //		scrollPane.setBounds(404, 165, 454, 309);

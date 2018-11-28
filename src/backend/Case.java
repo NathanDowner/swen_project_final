@@ -3,11 +3,15 @@ package backend;
 
 import java.io.File;
 import java.util.*;
+import java.time.format.DateTimeFormatter;  
+import java.time.LocalDateTime; 
 
 public class Case {
 	private static int lastId = 0;
+	private String caseTitle;
     private String caseId;
-    private Date startDate;
+    private Client client;
+    private LocalDateTime startDate;
     private ArrayList<String> status;
     private double baseFee;
     private ArrayList<Cost> caseCosts=new ArrayList<Cost>();
@@ -16,14 +20,29 @@ public class Case {
     private ArrayList<Contact> contact=new ArrayList<Contact>();
     private ArrayList<String> subTypes= new ArrayList<String>();
     private ArrayList<File> caseFiles=new ArrayList<File>();
-    private Date endDate;
+    private LocalDateTime endDate;
     private boolean inProgress;
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");  
+//    LocalDateTime time; 
 
+    public Case(Client c, CaseType type) {
+    	this.caseId = getNextCaseId();
+    	this.startDate = LocalDateTime.now();
+    	this.caseType = type;
+//    	this.caseTitle = type.getCaseType() +"-"+ client.getFullName();
+    	this.caseTitle = type.getCaseType()+"-"+getCaseId();
+    }
+    
     public Case() {
+    	
     }
     
     private static String getNextCaseId() {
     	return String.format("%05d", ++lastId);
+    }
+    
+    public String getStartDateAsString() {
+    	return dtf.format(startDate);
     }
 
     public String getCaseId() {
@@ -34,13 +53,10 @@ public class Case {
         this.caseId = caseID;
     }
 
-    public Date getStartDate() {
+    public LocalDateTime getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
 
     public ArrayList<String> getStatus() {
         return status;
@@ -68,7 +84,6 @@ public class Case {
     
     public double getCostToDate(){
         double total = 0.0;
-        
         for (Cost c: caseCosts) {
         	total += c.getCost();
         }
@@ -122,12 +137,8 @@ public class Case {
         caseFiles.add(caseFile);
     }
 
-    public Date getEndDate() {
+    public LocalDateTime getEndDate() {
         return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
     }
 
     public boolean isInProgress() {
@@ -138,18 +149,13 @@ public class Case {
         this.inProgress = inProgress;
     }
     
-
-    public Case(String caseId, Date startDate, ArrayList<String> status, double baseFee, String clientName, CaseType caseType, ArrayList<String> subTypes, ArrayList<File> caseFiles, Date endDate, boolean inProgress) {
-        this.caseId = caseId;
-        this.startDate = startDate;
-        this.status = status;
-        this.baseFee = baseFee;
-        this.clientName = clientName;
-        this.caseType = caseType;
-        this.subTypes = subTypes;
-        this.caseFiles = caseFiles;
-        this.endDate = endDate;
-        this.inProgress = inProgress;
+    public String toString() {
+    	return this.caseTitle;
+    }
+    
+    public String toString2() {
+    	//TODO type out the things in this view
+    	return "Not yet complete";
     }
     
 

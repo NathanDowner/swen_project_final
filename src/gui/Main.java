@@ -26,12 +26,13 @@ public class Main{
 		mainFrame.setPreferredSize((new Dimension(800, 500)));
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-//		creating the tabbed pane
+//		 creating the tabbed pane
 		JTabbedPane tabbedMain = new JTabbedPane();
 		tabbedMain.addTab("Clients",new ClientsScreen());
 		tabbedMain.addTab("Cases", new CasesScreen());
 		tabbedMain.addTab("Client View", clientViewTab);
 		tabbedMain.addTab("Add Client", new AddClientScreen());
+		tabbedMain.addTab("Add Case", new AddCaseScreen());
 		//tabbedMain.addTab("Cases",new caseGui();
 		
 //		window = new searchScreen(clientList);
@@ -43,12 +44,34 @@ public class Main{
 	}
 	
 	private void init() {
-		clientList.add(new Client("Nathan", "Downer"));
-		clientList.add(new Client("Kayon-Marie", "Douglas"));
-		clientList.add(new Client("Nathaniel", "Chirstie"));
-		clientList.add(new Client("Hugh", "Billings"));
-		clientList.add(new Client("Rajheem","O'Connor"));
-		clientList.add(new Client("Akili", "Sterling"));
+		ArrayList<String[]> tData = new ArrayList<String[]>();
+		tData.add(new String[] {"Nathan", "Downer", "Conveyancing"});
+		tData.add(new String[] {"Kayon-Marie", "Douglas", "Divorce"});
+		tData.add(new String[] {"Nathaniel", "Chirstie", "Admin and Estate"});
+		tData.add(new String[] {"Hugh", "Billings", "Conveyancing"});
+		tData.add(new String[] {"Rajheem","O'Connor", "Misc"});
+		tData.add(new String[] {"Akili", "Sterling", "Misc"});
+		
+		
+//		clientList.add(new Client("Nathan", "Downer",CaseType.Conveyancing));
+//		clientList.add(new Client("Kayon-Marie", "Douglas", CaseType.Divorce));
+//		clientList.add(new Client("Nathaniel", "Chirstie", CaseType.AdministrationAndEstate));
+//		clientList.add(new Client("Hugh", "Billings", CaseType.Conveyancing));
+//		clientList.add(new Client("Rajheem","O'Connor", CaseType.Misc));
+//		clientList.add(new Client("Akili", "Sterling", CaseType.Misc));
+		
+		Client c;
+		String[] cl;
+		Case cse;
+		for (int i=0; i<tData.size(); i++) {
+			cl = tData.get(i);
+			c = new Client(cl[0],cl[1]);
+			cse = new Case(c, CaseType.strToType(cl[2]));
+			caseList.add(cse);
+			c.addCase(cse);
+			clientList.add(c);
+		}
+		
 	}
 
 	public static void main(String[] args) {
