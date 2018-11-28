@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -47,7 +49,20 @@ public class CasesScreen extends JPanel {
 			public void valueChanged(ListSelectionEvent arg0) {
 //				Main.setCaseViewText(((Case)caseList.getSelectedValue()).toString2());
 				Case o = (Case)caseList.getSelectedValue();
-				Main.tabbedMain.addTab(o.getClient().getFullName(), new CaseView(o));
+				
+				JFrame clientViewFrame = new JFrame(o.getCaseTitle());
+				clientViewFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				clientViewFrame.setPreferredSize(new Dimension(600,550));
+				clientViewFrame.getContentPane().add(new CaseView(o));
+				clientViewFrame.pack();
+				clientViewFrame.setVisible(true);
+				
+				
+				
+				
+				
+				
+//				Main.tabbedMain.addTab(o.getClient().getFullName(), new CaseView(o));
 			}
 		});
 		caseList.setBounds(0, 0, 100, 100);
@@ -124,7 +139,7 @@ public class CasesScreen extends JPanel {
 	public static ArrayList<Case> searchForCaseByID(String key){
 		ArrayList<Case> searchResults = new ArrayList<Case>();
 		for (Case c: Main.caseList) {
-			if (c.getCaseId().equals(key)) {
+			if (c.getCaseId().contains(key)) {
 				searchResults.add(c);
 			}
 		}

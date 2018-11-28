@@ -30,7 +30,8 @@ public class Case {
     	this.caseId = getNextCaseId();
     	this.startDate = LocalDateTime.now();
     	this.caseType = type;
-    	this.caseTitle = type.getCaseType() +"-"+ client.getFullName();
+    	this.caseCosts.add(type.getBaseFee());
+    	this.caseTitle = type.getCaseType() +" - "+ client.getFullName();
 //    	this.caseTitle = type.getCaseType()+"-"+getCaseId();
     }
     
@@ -97,7 +98,7 @@ public class Case {
     }
     
     public double getCostToDate(){
-        double total = caseType.getBaseFee();
+        double total = 0.0d;
         for (Cost c: caseCosts) {
         	total += c.getCost();
         }

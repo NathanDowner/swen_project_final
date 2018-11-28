@@ -67,21 +67,30 @@ public class CaseView extends JPanel {
 		add(optionsPanel);
 		optionsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JButton btnAddCase = new JButton("Add Case");
-		optionsPanel.add(btnAddCase);
-		
 		JButton btnGenerateReport = new JButton("Generate report");
 		btnGenerateReport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JFrame stmtFrame = new JFrame("Statement of Accounts for "+ myCase.getClient().getFullName());
-				stmtFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				stmtFrame.setPreferredSize(new Dimension(400,550));
+				stmtFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				stmtFrame.setPreferredSize(new Dimension(600,550));
 				stmtFrame.getContentPane().add(new StatOfAccScreen(myCase.getCaseCostsStr(),myCase.getCostToDate()));
 				stmtFrame.pack();
 				stmtFrame.setVisible(true);
 			}
 		});
 		optionsPanel.add(btnGenerateReport);
+		
+		JButton btnEditCase = new JButton("Edit Case");
+		optionsPanel.add(btnEditCase);
+		
+		JButton btnClose = new JButton("CLOSE");
+		btnClose.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Main.tabbedMain.remove(Main.tabbedMain.getTabCount() -1);
+			}
+		});
+		btnClose.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
+		optionsPanel.add(btnClose);
 		
 //		ScrollPane scrollPane = new ScrollPane();
 //		scrollPane.setBounds(404, 165, 454, 309);

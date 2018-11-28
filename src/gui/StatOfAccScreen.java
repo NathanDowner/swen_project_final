@@ -15,12 +15,12 @@ public class StatOfAccScreen extends JPanel {
 	 */
 	public StatOfAccScreen(String txt, double total) {
 		setLayout(null);
-		setPreferredSize(new Dimension(350, 450));
+		setPreferredSize(new Dimension(500, 450));
 		
 		JTextArea textArea = new JTextArea();
 		textArea.setEditable(false);
 		textArea.setText(txt);
-		textArea.setBounds(10, 24, 327, 287);
+		textArea.setBounds(20, 27, 453, 287);
 		add(textArea);
 		
 		JLabel lblTotal = new JLabel("Total:");

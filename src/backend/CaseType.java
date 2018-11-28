@@ -7,19 +7,19 @@ public enum CaseType {
     Commercial("Commercial",120_000.00),
     Divorce("Divorce",65_000.00);
     
-    private final double baseFee;
-    private final String caseType;
+    private Cost baseFee;
+    private String caseType;
 	
 	CaseType(String caseType,double baseFee) {
 		this.caseType = caseType;
-		this.baseFee = baseFee;
+		this.baseFee = new Cost("Base Fee",baseFee);
 	}
 	
 	public String getCaseType() {
 		return this.caseType;
 	}
 	
-	public double getBaseFee() {
+	public Cost getBaseFee() {
 		return this.baseFee;
 	}
 	
