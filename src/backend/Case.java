@@ -91,8 +91,6 @@ public class Case {
         return total;
     }
     
-   
-    
     public void setContacts(ArrayList<Contact> contact){
         this.contact=contact;
     }

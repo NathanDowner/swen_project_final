@@ -73,6 +73,7 @@ public class Main{
 			caseList.add(cse);
 			c.addCase(cse);
 			clientList.add(c);
+			//TODO add 3 costs to each case
 		}
 		
 	}
