@@ -15,12 +15,15 @@ public class Main{
 	public static ArrayList<Client> clientList = new ArrayList<Client>();
 	public static ArrayList<Case> caseList = new ArrayList<Case>(); 
 	private static ClientView clientViewTab = new ClientView();
-	private static CaseView caseViewTab = new CaseView();
+//	private CaseView caseViewTab = new CaseView();
+	public static JTabbedPane tabbedMain = new JTabbedPane(JTabbedPane.LEFT);
+//	private CasesScreen caseScreenTab = new CasesScreen();
+	
 	
 	private JFrame mainFrame; 
 //	private Container mainPane;
 	private JPanel window;
-	JTabbedPane tabbedMain;
+	
 	
 	public Main () {
 		init();
@@ -29,14 +32,13 @@ public class Main{
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 //		 creating the tabbed pane
-		tabbedMain = new JTabbedPane();
+//		tabbedMain = new JTabbedPane(JTabbedPane.LEFT);
 		tabbedMain.addTab("Clients",new ClientsScreen());
 		tabbedMain.addTab("Cases", new CasesScreen());
-		tabbedMain.addTab("Case View", caseViewTab);
+//		tabbedMain.addTab("Case View", caseViewTab);
 		tabbedMain.addTab("Client View", clientViewTab);
 		tabbedMain.addTab("Add Client", new AddClientScreen());
 		tabbedMain.addTab("Add Case", new AddCaseScreen());
-		//tabbedMain.addTab("Cases",new caseGui();
 		
 //		window = new searchScreen(clientList);
 //		mainFrame.getContentPane().add(window);
@@ -48,12 +50,13 @@ public class Main{
 	
 	private void init() {
 		ArrayList<String[]> tData = new ArrayList<String[]>();
-		tData.add(new String[] {"Nathan", "Downer", "Conveyancing"});
-		tData.add(new String[] {"Kayon-Marie", "Douglas", "Divorce"});
-		tData.add(new String[] {"Nathaniel", "Chirstie", "Admin and Estate"});
-		tData.add(new String[] {"Hugh", "Billings", "Conveyancing"});
-		tData.add(new String[] {"Rajheem","O'Connor", "Misc"});
-		tData.add(new String[] {"Akili", "Sterling", "Misc"});
+		//                       cl0       ,cl1      ,cl2             ,cl3           ,cl4
+		tData.add(new String[] {"Nathan", "Downer", "Conveyancing","Surveyer's Fee", "15000.00"});
+		tData.add(new String[] {"Kayon-Marie", "Douglas", "Divorce","Process Server's Fee", "13500.00"});
+		tData.add(new String[] {"Nathaniel", "Chirstie", "Admin and Estate","Will Probation", "7500.00"});
+		tData.add(new String[] {"Hugh", "Billings", "Conveyancing","Lost Title Application", "9500"});
+		tData.add(new String[] {"Rajheem","O'Connor", "Misc", "Deedpoll Submission Fee (Rush)", "9000"});
+		tData.add(new String[] {"Akili", "Sterling", "Misc", "Consultancy Charge", "5500"});
 		
 		
 //		clientList.add(new Client("Nathan", "Downer",CaseType.Conveyancing));
@@ -70,6 +73,7 @@ public class Main{
 			cl = tData.get(i);
 			c = new Client(cl[0],cl[1]);
 			cse = new Case(c, CaseType.strToType(cl[2]));
+			cse.addCost(new Cost(cl[3],Double.parseDouble(cl[4])));
 			caseList.add(cse);
 			c.addCase(cse);
 			clientList.add(c);
@@ -77,6 +81,13 @@ public class Main{
 		}
 		
 	}
+	
+//	public static void addTab(String type,String tabTitle, Object o ) {
+//		switch (type) {
+//		case "case":
+//			tabbedMain.addTab(tabTitle, new CaseView((Case)o));
+//		}
+//	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -87,19 +98,9 @@ public class Main{
 		clientViewTab.setTxtPane(text);
 	}
 	
-	public static void setCaseViewText(String text) {
-		caseViewTab.setTxtPane(text);
-	}
-	
-//	public static void setTextView(String view, String text) {
-//		switch(view) {
-//		case "client":
-//			clientViewTab.setTxtPane(text);
-//			break;
-//		case "case":
-//			caseViewTab.setTxtPane(text);
-//			break;
-//		}
+//	public static void setCaseViewText(String text) {
+//		caseViewTab.setTxtPane(text);
 //	}
+	
 
 }

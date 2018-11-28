@@ -13,25 +13,35 @@ import javax.swing.JSeparator;
 import javax.swing.JList;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+
 import java.awt.ScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.border.TitledBorder;
+
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 public class CaseView extends JPanel {
 	private JTextField caseSearch;
 	private static JTextPane txtpnCaseData = new JTextPane();
+	private Case myCase;
 	
 
 	/**
 	 * Create the panel.
 	 */
-	public CaseView() {
-		setLayout(null);
+//	public CaseView(Case c) {
+//		CaseView();
+//		this.myCase = c;
+//	}
+	public CaseView(Case c) {
 		
+		setLayout(null);
+		//TODO add close btn on case to remove the -1 index of the tab pane
 		JLabel lblClients = new JLabel("CASE VIEW");
 		lblClients.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblClients.setBounds(28, 10, 122, 37);
@@ -63,7 +73,12 @@ public class CaseView extends JPanel {
 		JButton btnGenerateReport = new JButton("Generate report");
 		btnGenerateReport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Jframe stmtFrame = new JFrame("Statement of Accounts for")
+				JFrame stmtFrame = new JFrame("Statement of Accounts for "+ myCase.getClient().getFullName());
+				stmtFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				stmtFrame.setPreferredSize(new Dimension(450,350));
+				stmtFrame.getContentPane().add(new StatOfAccScreen(myCase.getCaseCostsStr(),myCase.getCostToDate()));
+				stmtFrame.pack();
+				stmtFrame.setVisible(true);
 			}
 		});
 		optionsPanel.add(btnGenerateReport);
@@ -72,7 +87,11 @@ public class CaseView extends JPanel {
 //		scrollPane.setBounds(404, 165, 454, 309);
 //		scrollPane.add(clientHeadings);
 //		add(scrollPane);
+		this.myCase = c;
+		setTxtPane(c.toString2());
 	}
+	
+	
 	
 	public static void setTxtPane(String text) {
 		txtpnCaseData.setText(text);

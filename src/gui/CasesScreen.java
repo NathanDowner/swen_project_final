@@ -45,7 +45,9 @@ public class CasesScreen extends JPanel {
 		caseList = new JList();
 		caseList.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
-				Main.setCaseViewText(((Case)caseList.getSelectedValue()).toString2());
+//				Main.setCaseViewText(((Case)caseList.getSelectedValue()).toString2());
+				Case o = (Case)caseList.getSelectedValue();
+				Main.tabbedMain.addTab(o.getClient().getFullName(), new CaseView(o));
 			}
 		});
 		caseList.setBounds(0, 0, 100, 100);
@@ -96,6 +98,8 @@ public class CasesScreen extends JPanel {
 		}
 		this.caseList.setModel(dlm);
 	}
+	
+
 
 
 	public String getClientName() {

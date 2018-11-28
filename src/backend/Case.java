@@ -26,16 +26,21 @@ public class Case {
 //    LocalDateTime time; 
 
     public Case(Client c, CaseType type) {
+    	this.client = c;
     	this.caseId = getNextCaseId();
     	this.startDate = LocalDateTime.now();
     	this.caseType = type;
-//    	this.caseTitle = type.getCaseType() +"-"+ client.getFullName();
-    	this.caseTitle = type.getCaseType()+"-"+getCaseId();
+    	this.caseTitle = type.getCaseType() +"-"+ client.getFullName();
+//    	this.caseTitle = type.getCaseType()+"-"+getCaseId();
     }
     
     public Case() {
     	this.caseId = getNextCaseId();
     	this.startDate = LocalDateTime.now();
+    }
+    
+    public Client getClient() {
+    	return this.client;
     }
     
     private static String getNextCaseId() {
@@ -67,10 +72,6 @@ public class Case {
         this.status = status;
     }
 
-    public double getBaseFee() {
-        return baseFee;
-    }
-
     public void setBaseFee(double baseFee) {
         this.baseFee = baseFee;
     }
@@ -78,13 +79,25 @@ public class Case {
     public ArrayList<Cost> getCaseCosts() {
         return caseCosts;
     }
+    
+    public void addCost(Cost c) {
+    	this.caseCosts.add(c);
+    }
+    
+    public String getCaseCostsStr() {
+    	String str = "";
+    	for (Cost c: caseCosts) {
+    		str += c.toString() + "\n";
+    	}
+    	return str;
+    }
 
     public void setCaseCosts(ArrayList<Cost> caseCosts) {
         this.caseCosts = caseCosts;
     }
     
     public double getCostToDate(){
-        double total = 0.0;
+        double total = caseType.getBaseFee();
         for (Cost c: caseCosts) {
         	total += c.getCost();
         }
