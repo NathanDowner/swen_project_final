@@ -15,10 +15,12 @@ public class Main{
 	public static ArrayList<Client> clientList = new ArrayList<Client>();
 	public static ArrayList<Case> caseList = new ArrayList<Case>(); 
 	private static ClientView clientViewTab = new ClientView();
+	private static CaseView caseViewTab = new CaseView();
 	
 	private JFrame mainFrame; 
 //	private Container mainPane;
 	private JPanel window;
+	JTabbedPane tabbedMain;
 	
 	public Main () {
 		init();
@@ -27,9 +29,10 @@ public class Main{
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 //		 creating the tabbed pane
-		JTabbedPane tabbedMain = new JTabbedPane();
+		tabbedMain = new JTabbedPane();
 		tabbedMain.addTab("Clients",new ClientsScreen());
 		tabbedMain.addTab("Cases", new CasesScreen());
+		tabbedMain.addTab("Case View", caseViewTab);
 		tabbedMain.addTab("Client View", clientViewTab);
 		tabbedMain.addTab("Add Client", new AddClientScreen());
 		tabbedMain.addTab("Add Case", new AddCaseScreen());
@@ -82,5 +85,20 @@ public class Main{
 	public static void setClientViewText(String text) {
 		clientViewTab.setTxtPane(text);
 	}
+	
+	public static void setCaseViewText(String text) {
+		caseViewTab.setTxtPane(text);
+	}
+	
+//	public static void setTextView(String view, String text) {
+//		switch(view) {
+//		case "client":
+//			clientViewTab.setTxtPane(text);
+//			break;
+//		case "case":
+//			caseViewTab.setTxtPane(text);
+//			break;
+//		}
+//	}
 
 }

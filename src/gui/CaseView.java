@@ -19,42 +19,39 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 
-public class ClientView extends JPanel {
-	private JTextField clientSearch;
-	private static JTextPane txtpnClientData = new JTextPane();
+public class CaseView extends JPanel {
+	private JTextField caseSearch;
+	private static JTextPane txtpnCaseData = new JTextPane();
 	
 
 	/**
 	 * Create the panel.
 	 */
-	public ClientView() {
+	public CaseView() {
 		setLayout(null);
 		
-		JLabel lblClients = new JLabel("CLIENT VIEW");
+		JLabel lblClients = new JLabel("CASE VIEW");
 		lblClients.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblClients.setBounds(28, 10, 122, 37);
 		add(lblClients);
 		
-		clientSearch = new JTextField();
-		clientSearch.setBounds(743, 280, 96, 19);
-		add(clientSearch);
-		clientSearch.setColumns(10);
+		caseSearch = new JTextField();
+		caseSearch.setBounds(743, 280, 96, 19);
+		add(caseSearch);
+		caseSearch.setColumns(10);
 		
 		JLabel lblEnterData = new JLabel("Enter Data:");
 		lblEnterData.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblEnterData.setBounds(602, 279, 82, 20);
 		add(lblEnterData);
-		txtpnClientData.setEditable(false);
+		txtpnCaseData.setEditable(false);
 		
-		txtpnClientData.setBounds(28, 70, 487, 409);
-		add(txtpnClientData);
+		txtpnCaseData.setBounds(28, 70, 487, 409);
+		add(txtpnCaseData);
 		
 		JList clientHeadings = new JList();
 		clientHeadings.setBounds(540, 70, 122, 181);
 		clientHeadings.setLayoutOrientation(JList.VERTICAL);
-		
-		DefaultListModel dlm = new DefaultListModel();
-		//TODO add teh headings for the different client data to the list model to the list
 		add(clientHeadings);
 		
 		JButton btnAddCase = new JButton("Add Case");
@@ -68,6 +65,6 @@ public class ClientView extends JPanel {
 	}
 	
 	public static void setTxtPane(String text) {
-		txtpnClientData.setText(text);
+		txtpnCaseData.setText(text);
 	}
 }

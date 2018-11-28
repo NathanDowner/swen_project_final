@@ -34,14 +34,15 @@ public class Case {
     }
     
     public Case() {
-    	
+    	this.caseId = getNextCaseId();
+    	this.startDate = LocalDateTime.now();
     }
     
     private static String getNextCaseId() {
     	return String.format("%05d", ++lastId);
     }
     
-    public String getStartDateAsString() {
+    public String getStartDateStr() {
     	return dtf.format(startDate);
     }
 
@@ -125,18 +126,6 @@ public class Case {
         this.subTypes = subTypes;
     }
 
-    public ArrayList<File> getCaseFiles() {
-        return caseFiles;
-    }
-
-    public void setCaseFiles(ArrayList<File> caseFiles) {
-        this.caseFiles = caseFiles;
-    }
-    
-    public void addCaseFile(File caseFile){
-        caseFiles.add(caseFile);
-    }
-
     public LocalDateTime getEndDate() {
         return endDate;
     }
@@ -149,13 +138,24 @@ public class Case {
         this.inProgress = inProgress;
     }
     
+    public String getCaseTitle() {
+    	return this.caseTitle;
+    }
+    
+    public String getCaseTypeStr() {
+    	return this.caseType.getCaseType();
+    }
+    
     public String toString() {
     	return this.caseTitle;
     }
     
     public String toString2() {
     	//TODO type out the things in this view
-    	return "Not yet complete";
+    	return "Case Id:   " + getCaseId() + "\n"
+    	+ "Case Title: " + getCaseTitle() + "\n"
+    	+ "Start Date: " + getStartDateStr() + "\n"
+    	+ "Case Type:  "+ getCaseTypeStr()+"\n";
     }
     
 

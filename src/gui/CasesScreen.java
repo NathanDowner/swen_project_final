@@ -45,7 +45,7 @@ public class CasesScreen extends JPanel {
 		caseList = new JList();
 		caseList.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
-				Main.setClientViewText("KOOOL");
+				Main.setCaseViewText(((Case)caseList.getSelectedValue()).toString2());
 			}
 		});
 		caseList.setBounds(0, 0, 100, 100);
@@ -81,18 +81,18 @@ public class CasesScreen extends JPanel {
 		});
 		clientSearchBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				loadClients(searchByClientName(searchTxtField.getText()));
+				loadCases(searchByClientName(searchTxtField.getText()));
 			}
 		});
 		
-		loadClients(Main.caseList);
+		loadCases(Main.caseList);
 	}
 
 
-	private void loadClients(ArrayList<Case> list) {
+	private void loadCases(ArrayList<Case> list) {
 		DefaultListModel dlm = new DefaultListModel();
 		for (Case c: list) {
-			dlm.addElement(c.toString());
+			dlm.addElement(c);
 		}
 		this.caseList.setModel(dlm);
 	}
