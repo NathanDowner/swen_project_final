@@ -37,6 +37,6 @@ public class TLSEmail {
 		
 		EmailUtil.sendEmail(session, toEmail, heading, body);
 		JOptionPane.showMessageDialog(null,"Email Sent Successfully!");
-		System.out.println("EMail Sent Successfully!!");
+		System.out.println("Email Sent Successfully!!");
 	}	
 }

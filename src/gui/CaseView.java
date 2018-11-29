@@ -173,7 +173,10 @@ public class CaseView extends JPanel {
 		JButton btnAddFile = new JButton("Add File");
 		btnAddFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				JFrame docFrame = new JFrame("New Document");
+				docFrame.setPreferredSize(Main.popupDim);
+				docFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				docFrame.getContentPane().add(new DocPane());
 			}
 		});
 		btnAddFile.setBounds(6, 150, 122, 21);
