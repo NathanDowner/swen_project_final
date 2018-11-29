@@ -6,6 +6,11 @@ import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.awt.event.ActionEvent;
 
 public class DocPane extends JPanel {
 	private JTextField fNameField;
@@ -31,8 +36,26 @@ public class DocPane extends JPanel {
 		fNameField.setColumns(10);
 		
 		JButton btnSaveFile = new JButton("Save File");
+		btnSaveFile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String fileName = fNameField.getText();
+				String titleTxt = textArea.getText();
+				createFile(fileName, titleTxt);
+			}
+		});
 		btnSaveFile.setBounds(59, 477, 169, 48);
 		add(btnSaveFile);
 		
+	}
+	
+	public void createFile(String title, String content) {
+		System.out.println("got here first");
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(".\\src\\Files\\"+title+".txt"))) {
+			System.out.println("got here");
+			bw.write(content);
+			bw.newLine();
+		} catch(IOException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

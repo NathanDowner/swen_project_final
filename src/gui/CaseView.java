@@ -175,6 +175,8 @@ public class CaseView extends JPanel {
 				docFrame.setPreferredSize(Main.popupDim);
 				docFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				docFrame.getContentPane().add(new DocPane());
+				docFrame.pack();
+				docFrame.setVisible(true);
 			}
 		});
 		btnAddFile.setBounds(6, 150, 122, 21);
