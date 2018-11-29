@@ -59,6 +59,11 @@ public class ClientView extends JPanel {
 		add(clientHeadings);
 		
 		JButton btnAddCase = new JButton("Add Case");
+		btnAddCase.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//TODO add JFrame for new case and set the client and case lists again
+			}
+		});
 		btnAddCase.setBounds(540, 362, 85, 21);
 		add(btnAddCase);
 		

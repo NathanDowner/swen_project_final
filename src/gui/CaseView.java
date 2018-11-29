@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 
 import javax.swing.JSeparator;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,10 +25,14 @@ import javax.swing.border.TitledBorder;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
 
 public class CaseView extends JPanel {
 	private JTextField caseSearch;
-	private static JTextPane txtpnCaseData = new JTextPane();
+	private static JTextPane txtpnCaseData = new JTextPane();//TODO remove static
+	JPanel editsPanel;
 	private Case myCase;
 	
 
@@ -56,11 +61,6 @@ public class CaseView extends JPanel {
 		txtpnCaseData.setBounds(28, 70, 396, 307);
 		add(txtpnCaseData);
 		
-		JList clientHeadings = new JList();
-		clientHeadings.setBounds(540, 70, 122, 181);
-		clientHeadings.setLayoutOrientation(JList.VERTICAL);
-		add(clientHeadings);
-		
 		JPanel optionsPanel = new JPanel();
 		optionsPanel.setBorder(new TitledBorder(null, "Options", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		optionsPanel.setBounds(464, 295, 227, 82);
@@ -81,6 +81,11 @@ public class CaseView extends JPanel {
 		optionsPanel.add(btnGenerateReport);
 		
 		JButton btnEditCase = new JButton("Edit Case");
+		btnEditCase.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				editsPanel.setVisible(true);
+			}
+		});
 		optionsPanel.add(btnEditCase);
 		
 		JButton btnClose = new JButton("CLOSE");
@@ -97,9 +102,57 @@ public class CaseView extends JPanel {
 //		scrollPane.add(clientHeadings);
 //		add(scrollPane);
 		this.myCase = c;
+		
+		editsPanel = new JPanel();
+		editsPanel.setVisible(false);
+		editsPanel.setBorder(new TitledBorder(null, "Available Edits", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		editsPanel.setBounds(464, 70, 134, 172);
+		add(editsPanel);
+		editsPanel.setLayout(null);
+		
+		JButton btnInProgress = new JButton("In Progress");
+		btnInProgress.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String newProg = JOptionPane.showInputDialog("Has the case been closed? Yes or no.");
+				switch (newProg.toLowerCase()) {
+					case "yes":
+						myCase.setInProgress(false);
+						break;
+					case "no":
+						myCase.setInProgress(true);
+						break;
+					default:
+						myCase.setInProgress(myCase.isInProgress());
+				}
+				refresh("Progress successfully updated.");
+			}
+		});
+		btnInProgress.setBounds(6, 26, 122, 36);
+		editsPanel.add(btnInProgress);
+		
+		JButton btnUpdateStatus = new JButton("Update Status");
+		btnUpdateStatus.setBounds(6, 72, 122, 36);
+		editsPanel.add(btnUpdateStatus);
+		
+		JButton btnAddContact = new JButton("Add Contact");
+		btnAddContact.setBounds(6, 118, 122, 36);
+		editsPanel.add(btnAddContact);
+		btnUpdateStatus.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String newStat = JOptionPane.showInputDialog("Enter the new case status.");
+				//TODO fix exception when user cancels pop up instead of providing a response
+				myCase.setStatus(newStat);
+				refresh("Status successfully updated.");
+			}
+		});
 		setTxtPane(c.toString2());
 	}
 	
+	private void refresh(String popUpTxt) {
+		setTxtPane(myCase.toString2());
+		editsPanel.setVisible(false);
+		JOptionPane.showMessageDialog(null, popUpTxt);
+	}
 	
 	
 	public static void setTxtPane(String text) {

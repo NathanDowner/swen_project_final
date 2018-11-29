@@ -12,14 +12,10 @@ public class Case {
     private String caseId;
     private Client client;
     private LocalDateTime startDate;
-    private ArrayList<String> status;
-    private double baseFee;
+    private String status;
     private ArrayList<Cost> caseCosts=new ArrayList<Cost>();
-    private String clientName;
     private CaseType caseType;
     private ArrayList<Contact> contact=new ArrayList<Contact>();
-    private ArrayList<String> subTypes= new ArrayList<String>();
-    private ArrayList<File> caseFiles=new ArrayList<File>();
     private LocalDateTime endDate;
     private boolean inProgress;
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");  
@@ -32,6 +28,8 @@ public class Case {
     	this.caseType = type;
     	this.caseCosts.add(type.getBaseFee());
     	this.caseTitle = type.getCaseType() +" - "+ client.getFullName();
+    	this.status = "Case file opened";
+    	this.inProgress = true;
 //    	this.caseTitle = type.getCaseType()+"-"+getCaseId();
     }
     
@@ -48,8 +46,8 @@ public class Case {
     	return String.format("%05d", ++lastId);
     }
     
-    public String getStartDateStr() {
-    	return dtf.format(startDate);
+    public String getDateStr(LocalDateTime date) {
+    	return dtf.format(date);
     }
 
     public String getCaseId() {
@@ -65,16 +63,12 @@ public class Case {
     }
 
 
-    public ArrayList<String> getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(ArrayList<String> status) {
+    public void setStatus(String status) {
         this.status = status;
-    }
-
-    public void setBaseFee(double baseFee) {
-        this.baseFee = baseFee;
     }
 
     public ArrayList<Cost> getCaseCosts() {
@@ -105,21 +99,12 @@ public class Case {
         return total;
     }
     
-    public void setContacts(ArrayList<Contact> contact){
-        this.contact=contact;
+    public void addContact(Contact c) {
+    	this.contact.add(c);
     }
     
     public ArrayList<Contact> getContact(){
         return contact;
-    }
-    
-
-    public String getClientName() {
-        return clientName;
-    }
-
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
     }
 
     public CaseType getCaseType() {
@@ -128,14 +113,6 @@ public class Case {
 
     public void setCaseType(CaseType caseType) {
         this.caseType = caseType;
-    }
-
-    public ArrayList<String> getSubTypes() {
-        return subTypes;
-    }
-
-    public void setSubTypes(ArrayList<String> subTypes) {
-        this.subTypes = subTypes;
     }
 
     public LocalDateTime getEndDate() {
@@ -147,6 +124,9 @@ public class Case {
     }
 
     public void setInProgress(boolean inProgress) {
+    	if (inProgress == false) {
+    		this.endDate = LocalDateTime.now();
+    	}
         this.inProgress = inProgress;
     }
     
@@ -163,11 +143,18 @@ public class Case {
     }
     
     public String toString2() {
-    	//TODO type out the things in this view
-    	return "Case Id:   " + getCaseId() + "\n"
+    	//TODO find out how to format the string so each line is equally tabbed
+    	String resp;
+    	resp = "Case Id:   " + getCaseId() + "\n"
     	+ "Case Title: " + getCaseTitle() + "\n"
-    	+ "Start Date: " + getStartDateStr() + "\n"
+    	+ "Current Status:" + getStatus() + "\n"
+    	+ "In Progress:" + isInProgress() + "\n"
+    	+ "Start Date: " + getDateStr(getStartDate()) + "\n"
     	+ "Case Type:  "+ getCaseTypeStr()+"\n";
+    	if (getEndDate() != null) {
+    		resp += "End Date: " + getDateStr(getEndDate()) + "\n";
+    	}
+    	return resp;
     }
     
 

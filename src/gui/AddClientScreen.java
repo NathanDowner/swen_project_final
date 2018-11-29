@@ -2,6 +2,8 @@ package gui;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
@@ -177,6 +179,8 @@ public class AddClientScreen extends JPanel {
 					email=emailField.getText();
 					occupation=occField.getText();
 					Main.clientList.add(new Client(lname, fname, homePhone, mobilePhone, workPhone, email, occupation, addresses));
+					JOptionPane.showMessageDialog(null, "Client successfully created.");
+					clearFields();
 					FileManager.saveData(Main.caseList, Main.clientList); //TODO have this process done when the software is closed
 					ClientsScreen.loadClients(Main.clientList);
 				}
@@ -184,6 +188,16 @@ public class AddClientScreen extends JPanel {
 		});
 		btnCreateClient.setBounds(422, 334, 132, 37);
 		add(btnCreateClient);
+	}
+	
+	private void clearFields() {
+		lnameField.setText("");
+		fnameField.setText("");
+		homeField.setText("");
+		mobileField.setText("");
+		workField.setText("");
+		emailField.setText("");
+		occField.setText("");
 	}
 	
 	private boolean emptyFields() {
