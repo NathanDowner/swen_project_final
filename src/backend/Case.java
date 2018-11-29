@@ -160,6 +160,10 @@ public class Case implements Serializable{
     	if (getEndDate() != null) {
     		resp += "End Date: " + getDateStr(getEndDate()) + "\n";
     	}
+    	resp += "Files:\n____________________________________________________________\n";
+    	for (File f: caseFiles) {
+    		resp += f.getName() +"\n";
+    	}
     	//TODO add out contacts
     	return resp;
     }

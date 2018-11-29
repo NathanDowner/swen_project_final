@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
 import javax.swing.border.TitledBorder;
@@ -31,6 +32,8 @@ public class CaseView extends JPanel {
 	private static JTextPane txtpnCaseData = new JTextPane();//TODO remove static
 	JPanel editsPanel;
 	private Case myCase;
+	public static String path = ".\\src\\Files\\"; 
+	//TODO make path varaible to pass to docPane for folders for each case
 	
 
 	/**
@@ -171,12 +174,35 @@ public class CaseView extends JPanel {
 		JButton btnAddFile = new JButton("Add File");
 		btnAddFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JFrame docFrame = new JFrame("New Document");
+				String dName = JOptionPane.showInputDialog("Enter the name of the file");
+				DocPane dp = new DocPane(dName);
+				JFrame docFrame = new JFrame("New Document "+ dName);
+				File f = new File(path+dName+".txt");
 				docFrame.setPreferredSize(Main.popupDim);
 				docFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				docFrame.getContentPane().add(new DocPane());
+				System.out.println("before adding");
+				docFrame.getContentPane().add(dp);
+				System.out.println("after adding");
 				docFrame.pack();
 				docFrame.setVisible(true);
+				myCase.addFile(f);
+				refresh("");
+				
+//				while()
+//				while(true) {
+//					System.out.println("in the loop");
+//					if (dp.isFileCreated()) {
+//						System.out.println("in the if");
+//						myCase.addFile(DocPane.fileName);
+//						System.out.println("file created");
+//						break;
+//					} else {
+//						System.out.println("in the else");
+//					}
+//				}
+				refresh("File Successfully Added to Client");
+					
+//				myCase.addFile(f);
 			}
 		});
 		btnAddFile.setBounds(6, 150, 122, 21);
@@ -186,10 +212,15 @@ public class CaseView extends JPanel {
 	}
 	
 	private void refresh(String popUpTxt) {
-		setTxtPane(myCase.toString2());
 		editsPanel.setVisible(false);
 		Main.updateFile();
-		JOptionPane.showMessageDialog(this, popUpTxt);
+		setTxtPane(myCase.toString2());
+		if (popUpTxt.length() != 0) {
+			JOptionPane.showMessageDialog(this, popUpTxt);
+		}
+		
+		
+		
 	}
 	
 	private String promptUser(String question) {
