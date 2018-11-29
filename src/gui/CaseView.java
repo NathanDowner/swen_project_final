@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.JSeparator;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.Box;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -106,7 +107,7 @@ public class CaseView extends JPanel {
 		editsPanel = new JPanel();
 		editsPanel.setVisible(false);
 		editsPanel.setBorder(new TitledBorder(null, "Available Edits", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		editsPanel.setBounds(464, 70, 134, 172);
+		editsPanel.setBounds(464, 70, 134, 215);
 		add(editsPanel);
 		editsPanel.setLayout(null);
 		
@@ -114,6 +115,7 @@ public class CaseView extends JPanel {
 		btnInProgress.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String newProg = JOptionPane.showInputDialog("Has the case been closed? Yes or no.");
+				//TODO get nathaniel or Akili to do a try catch for when the user clicks cancel
 				switch (newProg.toLowerCase()) {
 					case "yes":
 						myCase.setInProgress(false);
@@ -137,6 +139,50 @@ public class CaseView extends JPanel {
 		JButton btnAddContact = new JButton("Add Contact");
 		btnAddContact.setBounds(6, 118, 122, 36);
 		editsPanel.add(btnAddContact);
+		
+		JButton btnAddCost = new JButton("Add Cost");
+		btnAddCost.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JPanel costPrompt = new JPanel();
+				costPrompt.setLayout(new GridLayout(2,2));
+				
+				JLabel l1 = new JLabel("Cost Name:");
+				JTextField cName = new JTextField();
+				JLabel l2 = new JLabel("Cost Amount:");
+				JTextField cCost = new JTextField();
+				
+				costPrompt.add(l1);
+				costPrompt.add(cName);
+				costPrompt.add(l2);
+				costPrompt.add(cCost);
+				int result = JOptionPane.showConfirmDialog(null,costPrompt, 
+						"Enter the cost data to be added.", JOptionPane.OK_CANCEL_OPTION);
+				if (result == JOptionPane.OK_OPTION) {
+					myCase.addCost(new Cost(cName.getText(),Double.parseDouble(cCost.getText())));
+					refresh("Cost Successfully added");
+				} else {
+					
+				}
+//				JTextField xField = new JTextField(5);
+//			    JTextField yField = new JTextField(5);
+//
+//		      JPanel myPanel = new JPanel();
+//		      myPanel.add(new JLabel("Cost Name"));
+//		      myPanel.add(xField);
+//		      myPanel.add(Box.createHorizontalStrut(15)); // a spacer
+//		      myPanel.add(new JLabel("y:"));
+//		      myPanel.add(yField);
+//
+//		      int result = JOptionPane.showConfirmDialog(null, myPanel, 
+//		               "Please Enter X and Y Values", JOptionPane.OK_CANCEL_OPTION);
+//		      if (result == JOptionPane.OK_OPTION) {
+//		         System.out.println("x value: " + xField.getText());
+//		         System.out.println("y value: " + yField.getText());
+//		      }
+			}
+		});
+		btnAddCost.setBounds(6, 164, 122, 41);
+		editsPanel.add(btnAddCost);
 		btnUpdateStatus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String newStat = JOptionPane.showInputDialog("Enter the new case status.");
@@ -151,7 +197,8 @@ public class CaseView extends JPanel {
 	private void refresh(String popUpTxt) {
 		setTxtPane(myCase.toString2());
 		editsPanel.setVisible(false);
-		JOptionPane.showMessageDialog(null, popUpTxt);
+		Main.updateFile();
+		JOptionPane.showMessageDialog(this, popUpTxt);
 	}
 	
 	

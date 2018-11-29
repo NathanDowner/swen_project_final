@@ -1,9 +1,11 @@
 package backend;
 
+import java.io.Serializable;
+
 /**
  *
  */
-public class Address {
+public class Address implements Serializable{
 
     /**
      * Default constructor

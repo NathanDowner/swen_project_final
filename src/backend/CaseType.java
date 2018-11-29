@@ -1,6 +1,8 @@
 package backend;
 
-public enum CaseType {
+import java.io.Serializable;
+
+public enum CaseType implements Serializable{
     Conveyancing("Conveyancing",50_000.00),
     Misc("Misc",25_000.00),
     AdministrationAndEstate("Admin and Estate",60_000.00),

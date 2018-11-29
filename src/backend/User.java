@@ -1,4 +1,4 @@
-package JDBackend;
+package backend;
 
 import java.util.*;
 import java.io.*;

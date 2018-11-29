@@ -1,5 +1,6 @@
 package backend;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -7,7 +8,7 @@ import java.util.*;
 /**
  * 
  */
-public class Cost {
+public class Cost implements Serializable{
 
     private String costName;
     private double cost;

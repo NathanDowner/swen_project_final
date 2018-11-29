@@ -1,8 +1,11 @@
+package backend;
+
+import java.io.Serializable;
 
 /**
  * 
  */
-public enum AddressType {
+public enum AddressType implements Serializable{
     Home,
     Work
 }

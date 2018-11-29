@@ -2,11 +2,12 @@ package backend;
 
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.*;
 import java.time.format.DateTimeFormatter;  
 import java.time.LocalDateTime; 
 
-public class Case {
+public class Case implements Serializable{
 	private static int lastId = 0;
 	private String caseTitle;
     private String caseId;

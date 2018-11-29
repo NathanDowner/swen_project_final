@@ -181,7 +181,7 @@ public class AddClientScreen extends JPanel {
 					Main.clientList.add(new Client(lname, fname, homePhone, mobilePhone, workPhone, email, occupation, addresses));
 					JOptionPane.showMessageDialog(null, "Client successfully created.");
 					clearFields();
-					FileManager.saveData(Main.caseList, Main.clientList); //TODO have this process done when the software is closed
+					Main.updateFile();
 					ClientsScreen.loadClients(Main.clientList);
 				}
 			}

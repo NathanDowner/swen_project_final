@@ -1,10 +1,13 @@
+package backend;
 
+
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * Contacts are persons, other than the client, who are involved in the case  either directly, like another law firm, or indirectly like a friend at title's offie who helps speed things along
  */
-public class Contact {
+public class Contact implements Serializable{
 
     private String name;
     private String number;
@@ -19,6 +22,11 @@ public class Contact {
     }
 
     public Contact() {
+    }
+    
+    public Contact(String name, String Number) {
+    	this.name = name;
+    	this.number = number;
     }
 
     public String getName() {

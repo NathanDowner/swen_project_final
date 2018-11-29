@@ -54,6 +54,10 @@ public class Main{
 		mainFrame.setVisible(true);
 	}
 	
+	public static void updateFile() {
+		FileManager.saveData(caseList, clientList); //TODO have this process done when the software is closed
+	}
+	
 	private void init() {
 		ArrayList<String[]> tData = new ArrayList<String[]>();
 		//                       cl0       ,cl1      ,cl2             ,cl3           ,cl4

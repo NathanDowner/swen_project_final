@@ -1,3 +1,5 @@
+package backend;
+
 public enum ConveyancingType {
     Sale,
     Purchase,
