@@ -8,6 +8,10 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 public class StatOfAccScreen extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField totalField;
 
 	/**

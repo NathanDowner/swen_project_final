@@ -4,9 +4,8 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import java.awt.GridLayout;
 import java.util.ArrayList;
-import java.util.regex.Pattern;
+import java.util.regex.*;
 
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -22,6 +21,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class AddClientScreen extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField lnameField;
 	private JTextField fnameField;
 	private JTextField mobileField;
@@ -32,7 +35,6 @@ public class AddClientScreen extends JPanel {
 	private JTextField adrLine1Field;
 	private JTextField adrCountryField;
 	private String lname;
-	private String clientId;
 	private String fname;
 	private String homePhone;
 	private String mobilePhone;
