@@ -20,7 +20,7 @@ public class Case implements Serializable{
     private ArrayList<File> caseFiles = new ArrayList<File>();
     private LocalDateTime endDate;
     private boolean inProgress;
-    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");  
+    private static String dtfString = "dd/MM/yyyy HH:mm:ss";
 //    LocalDateTime time; 
 
     public Case(Client c, CaseType type) {
@@ -53,6 +53,7 @@ public class Case implements Serializable{
     }
     
     public String getDateStr(LocalDateTime date) {
+    	DateTimeFormatter dtf = DateTimeFormatter.ofPattern(dtfString);
     	return dtf.format(date);
     }
 

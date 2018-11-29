@@ -36,6 +36,7 @@ public class DocPane extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				String titleTxt = textArea.getText();
 				createFile(titleTxt);
+
 			}
 		});
 		btnSaveFile.setBounds(315, 479, 169, 48);
@@ -56,7 +57,7 @@ public class DocPane extends JPanel {
 			bw.newLine();
 			fileName = new File(path);
 			fileCreated = true;
-			JOptionPane.showMessageDialog(this, "File Successfully Created");
+			JOptionPane.showMessageDialog(this, "File Successfully Added to Client");
 		} catch(IOException e) {
 			System.out.println(e.getMessage());
 		}

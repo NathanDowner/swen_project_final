@@ -13,7 +13,7 @@ public class Cost implements Serializable{
     private String costName;
     private double cost;
     private LocalDateTime dateIncurred;
-    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+    private static String dtfString = "dd/MM/yyyy HH:mm:ss";
 
     public Cost(String costName, double cost) {
         this.costName = costName;
@@ -29,6 +29,7 @@ public class Cost implements Serializable{
     }
     
     public String getDateIncurredAsString() {
+    	DateTimeFormatter dtf = DateTimeFormatter.ofPattern(dtfString);
     	return dtf.format(dateIncurred);
     }
 

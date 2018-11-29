@@ -200,7 +200,7 @@ public class CaseView extends JPanel {
 //						System.out.println("in the else");
 //					}
 //				}
-				refresh("File Successfully Added to Client");
+//				refresh("File Successfully Added to Client");
 					
 //				myCase.addFile(f);
 			}
@@ -218,15 +218,11 @@ public class CaseView extends JPanel {
 		if (popUpTxt.length() != 0) {
 			JOptionPane.showMessageDialog(this, popUpTxt);
 		}
-		
-		
-		
 	}
 	
 	private String promptUser(String question) {
 		return JOptionPane.showInputDialog(question);
 	}
-	
 	
 	public static void setTxtPane(String text) {
 		txtpnCaseData.setText(text);

@@ -1,6 +1,8 @@
 package gui;
 
 import java.awt.Dimension;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 
@@ -32,7 +34,16 @@ public class Main{
 		}
 		mainFrame = new JFrame("Johnson & Downer Client and Case Management System");
 		mainFrame.setPreferredSize(dim);
-		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+	    mainFrame.addWindowListener(new WindowAdapter() {
+	        @Override
+	        public void windowClosing(WindowEvent event) {
+	        	updateFile();
+	            mainFrame.dispose();
+	            System.exit(0);
+	        }
+	    });
 		
 //		 creating the tabbed pane
 //		tabbedMain = new JTabbedPane(JTabbedPane.LEFT);
@@ -52,7 +63,9 @@ public class Main{
 	}
 	
 	public static void updateFile() {
+		
 		FileManager.saveData(caseList, clientList); //TODO have this process done when the software is closed
+		System.out.println("exiting");
 	}
 	
 	private void init() {
