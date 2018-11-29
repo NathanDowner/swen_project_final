@@ -12,12 +12,8 @@ import javax.swing.JTextField;
 import javax.swing.JSeparator;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.Box;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-
-import java.awt.ScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
@@ -114,7 +110,7 @@ public class CaseView extends JPanel {
 		JButton btnInProgress = new JButton("In Progress");
 		btnInProgress.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String newProg = JOptionPane.showInputDialog("Has the case been closed? Yes or no.");
+				String newProg = promptUser("Has the case been closed? Yes or no.");
 				//TODO get nathaniel or Akili to do a try catch for when the user clicks cancel
 				switch (newProg.toLowerCase()) {
 					case "yes":
@@ -133,8 +129,17 @@ public class CaseView extends JPanel {
 		editsPanel.add(btnInProgress);
 		
 		JButton btnUpdateStatus = new JButton("Update Status");
+		
 		btnUpdateStatus.setBounds(6, 72, 122, 36);
 		editsPanel.add(btnUpdateStatus);
+		btnUpdateStatus.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String newStat = promptUser("Enter the new case status.");
+				//TODO fix exception when user cancels pop up instead of providing a response
+				myCase.setStatus(newStat);
+				refresh("Status successfully updated.");
+			}
+		});
 		
 		JButton btnAddContact = new JButton("Add Contact");
 		btnAddContact.setBounds(6, 118, 122, 36);
@@ -160,38 +165,14 @@ public class CaseView extends JPanel {
 				if (result == JOptionPane.OK_OPTION) {
 					myCase.addCost(new Cost(cName.getText(),Double.parseDouble(cCost.getText())));
 					refresh("Cost Successfully added");
-				} else {
-					
 				}
-//				JTextField xField = new JTextField(5);
-//			    JTextField yField = new JTextField(5);
-//
-//		      JPanel myPanel = new JPanel();
-//		      myPanel.add(new JLabel("Cost Name"));
-//		      myPanel.add(xField);
-//		      myPanel.add(Box.createHorizontalStrut(15)); // a spacer
-//		      myPanel.add(new JLabel("y:"));
-//		      myPanel.add(yField);
-//
-//		      int result = JOptionPane.showConfirmDialog(null, myPanel, 
-//		               "Please Enter X and Y Values", JOptionPane.OK_CANCEL_OPTION);
-//		      if (result == JOptionPane.OK_OPTION) {
-//		         System.out.println("x value: " + xField.getText());
-//		         System.out.println("y value: " + yField.getText());
-//		      }
+//			
 			}
 		});
 		btnAddCost.setBounds(6, 164, 122, 41);
 		editsPanel.add(btnAddCost);
-		btnUpdateStatus.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				String newStat = JOptionPane.showInputDialog("Enter the new case status.");
-				//TODO fix exception when user cancels pop up instead of providing a response
-				myCase.setStatus(newStat);
-				refresh("Status successfully updated.");
-			}
-		});
 		setTxtPane(c.toString2());
+		
 	}
 	
 	private void refresh(String popUpTxt) {
@@ -199,6 +180,10 @@ public class CaseView extends JPanel {
 		editsPanel.setVisible(false);
 		Main.updateFile();
 		JOptionPane.showMessageDialog(this, popUpTxt);
+	}
+	
+	private String promptUser(String question) {
+		return JOptionPane.showInputDialog(question);
 	}
 	
 	

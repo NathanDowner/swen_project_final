@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 
 import javax.swing.JSeparator;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.ScrollPane;
@@ -24,6 +25,7 @@ import java.awt.FlowLayout;
 public class ClientView extends JPanel {
 	private static JTextPane txtpnClientData = new JTextPane();
 	private Client myClient;
+	private JPanel editsPanel;
 	
 
 	/**
@@ -50,23 +52,52 @@ public class ClientView extends JPanel {
 		
 		this.myClient = c;
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Available Edits", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(540, 70, 129, 184);
-		add(panel);
-		panel.setLayout(null);
+		editsPanel = new JPanel();
+		editsPanel.setVisible(false);
+		editsPanel.setBorder(new TitledBorder(null, "Available Edits", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		editsPanel.setBounds(540, 70, 129, 184);
+		add(editsPanel);
+		editsPanel.setLayout(null);
 		
 		JButton btnEmail = new JButton("Email");
+		btnEmail.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				myClient.setEmail(promptUser("Enter updated email address"));
+				refresh("Email Successfully Updated");
+			}
+		});
 		btnEmail.setBounds(10, 23, 109, 21);
-		panel.add(btnEmail);
+		editsPanel.add(btnEmail);
 		
 		JButton btnHomePhone = new JButton("home phone");
+		btnHomePhone.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				myClient.setHomePhone(promptUser("Enter updated home phone number."));
+				refresh("Home phone number successfully updated");
+			}
+		});
 		btnHomePhone.setBounds(10, 54, 109, 21);
-		panel.add(btnHomePhone);
+		editsPanel.add(btnHomePhone);
 		
 		JButton btnMobilePhone = new JButton("mobile phone");
+		btnMobilePhone.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				myClient.setMobilePhone(promptUser("Enter updated mobile phone number."));
+				refresh("Mobile  Phone Number successfully updated");
+			}
+		});
 		btnMobilePhone.setBounds(10, 85, 109, 21);
-		panel.add(btnMobilePhone);
+		editsPanel.add(btnMobilePhone);
+		
+		JButton btnOccupation = new JButton("Occupation");
+		btnOccupation.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				myClient.setOccupation(promptUser("Enter updated occupation."));
+				refresh("Occupation successfully updated");
+			}
+		});
+		btnOccupation.setBounds(10, 116, 109, 21);
+		editsPanel.add(btnOccupation);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Options", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -78,6 +109,11 @@ public class ClientView extends JPanel {
 		panel_1.add(btnAddCase);
 		
 		JButton btnEditClient = new JButton("Edit Client");
+		btnEditClient.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				editsPanel.setVisible(true);
+			}
+		});
 		panel_1.add(btnEditClient);
 		btnAddCase.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -85,6 +121,17 @@ public class ClientView extends JPanel {
 			}
 		});
 		setTxtPane(c.toString2());
+	}
+	
+	private void refresh(String popUpTxt) {
+		setTxtPane(myClient.toString2());
+		editsPanel.setVisible(false);
+		Main.updateFile();
+		JOptionPane.showMessageDialog(this, popUpTxt);
+	}
+	
+	private String promptUser(String question) {
+		return JOptionPane.showInputDialog(question);
 	}
 	
 	public static void setTxtPane(String text) {
