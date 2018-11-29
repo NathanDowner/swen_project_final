@@ -49,13 +49,13 @@ public class CasesScreen extends JPanel {
 			public void valueChanged(ListSelectionEvent arg0) {
 //				Main.setCaseViewText(((Case)caseList.getSelectedValue()).toString2());
 				Case o = (Case)caseList.getSelectedValue();
-				
-				JFrame clientViewFrame = new JFrame(o.getCaseTitle());
-				clientViewFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				clientViewFrame.setPreferredSize(new Dimension(600,550));
-				clientViewFrame.getContentPane().add(new CaseView(o));
-				clientViewFrame.pack();
-				clientViewFrame.setVisible(true);
+				//TODO figure out why its opening two slides;
+				JFrame caseViewFrame = new JFrame(o.getCaseTitle());
+				caseViewFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				caseViewFrame.setPreferredSize(new Dimension(600,550));//TODO pass dimension from main
+				caseViewFrame.getContentPane().add(new CaseView(o));
+				caseViewFrame.pack();
+				caseViewFrame.setVisible(true);
 				
 				
 				

@@ -22,12 +22,13 @@ import javax.swing.JTextPane;
 public class ClientView extends JPanel {
 	private JTextField clientSearch;
 	private static JTextPane txtpnClientData = new JTextPane();
+	private Client myClient;
 	
 
 	/**
 	 * Create the panel.
 	 */
-	public ClientView() {
+	public ClientView(Client c) {
 		setLayout(null);
 		//TODO add close btn on client to remove the -1 index of the tab pane
 		JLabel lblClients = new JLabel("CLIENT VIEW");
@@ -65,6 +66,9 @@ public class ClientView extends JPanel {
 //		scrollPane.setBounds(404, 165, 454, 309);
 //		scrollPane.add(clientHeadings);
 //		add(scrollPane);
+		
+		this.myClient = c;
+		setTxtPane(c.toString2());
 	}
 	
 	public static void setTxtPane(String text) {

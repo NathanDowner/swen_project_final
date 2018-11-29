@@ -14,7 +14,7 @@ import backend.*;
 public class Main{
 	public static ArrayList<Client> clientList = new ArrayList<Client>();
 	public static ArrayList<Case> caseList = new ArrayList<Case>(); 
-	private static ClientView clientViewTab = new ClientView();
+//	private static ClientView clientViewTab = new ClientView();
 //	private CaseView caseViewTab = new CaseView();
 	public static JTabbedPane tabbedMain = new JTabbedPane(JTabbedPane.LEFT);
 //	private CasesScreen caseScreenTab = new CasesScreen();
@@ -23,10 +23,16 @@ public class Main{
 	private JFrame mainFrame; 
 //	private Container mainPane;
 	private JPanel window;
-	
+	private static FileManager fManage = new FileManager();
 	
 	public Main () {
-		init();
+		
+		if(!fManage.loadData())
+			init();
+		else {
+			caseList = fManage.getCases();
+			clientList = fManage.getClients();
+		}
 		mainFrame = new JFrame("Johnson & Downer Client and Case Management System");
 		mainFrame.setPreferredSize((new Dimension(800, 500)));
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,7 +42,7 @@ public class Main{
 		tabbedMain.addTab("Clients",new ClientsScreen());
 		tabbedMain.addTab("Cases", new CasesScreen());
 //		tabbedMain.addTab("Case View", caseViewTab);
-		tabbedMain.addTab("Client View", clientViewTab);
+//		tabbedMain.addTab("Client View", clientViewTab);
 		tabbedMain.addTab("Add Client", new AddClientScreen());
 		tabbedMain.addTab("Add Case", new AddCaseScreen());
 		
@@ -94,9 +100,9 @@ public class Main{
 		Main m = new Main();
 	}
 	
-	public static void setClientViewText(String text) {
-		clientViewTab.setTxtPane(text);
-	}
+//	public static void setClientViewText(String text) {
+//		clientViewTab.setTxtPane(text);
+//	}
 	
 //	public static void setCaseViewText(String text) {
 //		caseViewTab.setTxtPane(text);

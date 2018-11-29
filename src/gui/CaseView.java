@@ -84,11 +84,11 @@ public class CaseView extends JPanel {
 		optionsPanel.add(btnEditCase);
 		
 		JButton btnClose = new JButton("CLOSE");
-		btnClose.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Main.tabbedMain.remove(Main.tabbedMain.getTabCount() -1);
-			}
-		});
+//		btnClose.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent arg0) {
+//				Main.tabbedMain.remove(Main.tabbedMain.getTabCount() -1);
+//			}
+//		});
 		btnClose.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
 		optionsPanel.add(btnClose);
 		

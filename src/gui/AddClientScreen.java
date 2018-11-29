@@ -11,6 +11,7 @@ import javax.swing.border.TitledBorder;
 
 import backend.Address;
 import backend.Client;
+import backend.FileManager;
 
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
@@ -176,6 +177,7 @@ public class AddClientScreen extends JPanel {
 					email=emailField.getText();
 					occupation=occField.getText();
 					Main.clientList.add(new Client(lname, fname, homePhone, mobilePhone, workPhone, email, occupation, addresses));
+					FileManager.saveData(Main.caseList, Main.clientList); //TODO have this process done when the software is closed
 					ClientsScreen.loadClients(Main.clientList);
 				}
 			}

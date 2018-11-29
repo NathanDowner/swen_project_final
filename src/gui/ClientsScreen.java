@@ -2,6 +2,8 @@ package gui;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+
+import java.awt.Dimension;
 import java.awt.Font;
 import java.util.ArrayList;
 
@@ -13,6 +15,8 @@ import javax.swing.JSeparator;
 import javax.swing.JList;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+
 import java.awt.ScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -43,7 +47,14 @@ public class ClientsScreen extends JPanel {
 		clientList = new JList();
 		clientList.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
-				Main.setClientViewText(((Client)clientList.getSelectedValue()).toString2());
+//				Main.setClientViewText(((Client)clientList.getSelectedValue()).toString2());
+				Client cl = (Client)clientList.getSelectedValue();
+				JFrame clientViewFrame = new JFrame(cl.getFullName());
+				clientViewFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				clientViewFrame.setPreferredSize(new Dimension(600,550));//TODO pass dimension from main
+				clientViewFrame.getContentPane().add(new ClientView(cl));
+				clientViewFrame.pack();
+				clientViewFrame.setVisible(true);
 			}
 		});
 		clientList.setBounds(0, 0, 100, 100);
