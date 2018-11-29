@@ -32,4 +32,8 @@ public enum CaseType implements Serializable{
 			}
 		} return CaseType.Misc;
 	}
+	
+	public String toString() {
+		return getCaseType();
+	}
 }

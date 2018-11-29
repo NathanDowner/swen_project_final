@@ -27,7 +27,7 @@ public class CasesScreen extends JPanel {
 	 */
 	private ArrayList<Case> cases;
 	private JTextField searchTxtField;
-	private JList caseList;
+	private static JList caseList;
 	private String clientName;
 	private String caseID;
 	
@@ -94,11 +94,22 @@ public class CasesScreen extends JPanel {
 		searchPanel.add(caseSearchBtn);
 		caseSearchBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				String txt = searchTxtField.getText();
+				if (txt.length() == 0) {
+					loadCases(Main.caseList);
+				} else {
+					loadCases(searchByCaseID(txt));
+				}
 			}
 		});
 		clientSearchBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				loadCases(searchByClientName(searchTxtField.getText()));
+				String txt = searchTxtField.getText();
+				if (txt.length() == 0) {
+					loadCases(Main.caseList);
+				} else {
+					loadCases(searchByClientName(txt));
+				}
 			}
 		});
 		
@@ -106,12 +117,12 @@ public class CasesScreen extends JPanel {
 	}
 
 
-	private void loadCases(ArrayList<Case> list) {
+	public static void loadCases(ArrayList<Case> list) {
 		DefaultListModel dlm = new DefaultListModel();
 		for (Case c: list) {
 			dlm.addElement(c);
 		}
-		this.caseList.setModel(dlm);
+		caseList.setModel(dlm);
 	}
 	
 
@@ -136,7 +147,7 @@ public class CasesScreen extends JPanel {
 		this.caseID = clientID;
 	}
 	
-	public static ArrayList<Case> searchForCaseByID(String key){
+	public static ArrayList<Case> searchByCaseID(String key){
 		ArrayList<Case> searchResults = new ArrayList<Case>();
 		for (Case c: Main.caseList) {
 			if (c.getCaseId().contains(key)) {

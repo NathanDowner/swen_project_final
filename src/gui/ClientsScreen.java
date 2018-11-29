@@ -79,18 +79,29 @@ public class ClientsScreen extends JPanel {
 		clientSearch.setColumns(10);
 		//clientList.setVisibleRowCount(4);
 		
-		JButton searchBtn = new JButton("Search by CLIENT NAME");
+		JButton searchBtn = new JButton("Search by Client Name");
 		searchPanel.add(searchBtn);
 		
-		JButton button = new JButton("Search by CASE ID");
+		JButton button = new JButton("Search by Client ID");
 		searchPanel.add(button);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				String txt = clientSearch.getText();
+				if (txt.length() == 0) {
+					loadClients(Main.clientList);
+				} else {
+					loadClients(searchByClientID(txt));
+				}
 			}
 		});
 		searchBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				loadClients(searchByClientName(clientSearch.getText()));
+				String txt = clientSearch.getText();
+				if (txt.length() == 0) {
+					loadClients(Main.clientList);
+				} else {
+					loadClients(searchByClientName(txt));
+				}
 			}
 		});
 		
@@ -126,7 +137,7 @@ public class ClientsScreen extends JPanel {
 		this.clientID = clientID;
 	}
 	
-	public static ArrayList<Client> searchForClientByID(String key){
+	public static ArrayList<Client> searchByClientID(String key){
 		ArrayList<Client> searchResults = new ArrayList<Client>();
 		for (Client cl: Main.clientList) {
 			if (cl.getClientId().contains(key)) {

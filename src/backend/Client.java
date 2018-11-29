@@ -165,10 +165,10 @@ public class Client implements Serializable{
                 "Mobilephone:  " + mobilePhone + "\n" +
                 "Email:        " + email + "\n" +
                 "Occupation:   " + occupation + "\n" +
-                "Cases:        ";
+                "\nCases:\n________________________________________________________________\n";
         for (Case c: cases){
-        	text += c.getCaseId() + " ";
-        }
+        	text += c.getCaseId()+"/ "+c.getCaseTypeStr()+"\n";
+       }
         return text;
     }
 }
