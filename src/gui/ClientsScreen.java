@@ -11,7 +11,6 @@ import backend.*;
 
 import javax.swing.JTextField;
 
-import javax.swing.JSeparator;
 import javax.swing.JList;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -25,9 +24,12 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.border.TitledBorder;
 
 public class ClientsScreen extends JPanel {
-	private ArrayList<Client> clients;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField clientSearch;
-	private static JList clientList;
+	private static JList<Client> clientList = new JList<Client>();
 	private String clientName;
 	private String clientID;
 	
@@ -36,7 +38,6 @@ public class ClientsScreen extends JPanel {
 	 * Create the panel.
 	 */
 	public ClientsScreen() {
-		this.clients = Main.clientList;
 		setLayout(null);
 		
 		JLabel lblClients = new JLabel("CLIENTS");
@@ -44,7 +45,6 @@ public class ClientsScreen extends JPanel {
 		lblClients.setBounds(28, 10, 122, 37);
 		add(lblClients);
 		
-		clientList = new JList();
 		clientList.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
 //				Main.setClientViewText(((Client)clientList.getSelectedValue()).toString2());
@@ -110,7 +110,7 @@ public class ClientsScreen extends JPanel {
 
 
 	public static void loadClients(ArrayList<Client> list) {
-		DefaultListModel dlm = new DefaultListModel();
+		DefaultListModel<Client> dlm = new DefaultListModel<Client>();
 		for (Client c: list) {
 			dlm.addElement(c);
 		}

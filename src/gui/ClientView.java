@@ -3,26 +3,22 @@ package gui;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.util.ArrayList;
 
 import backend.*;
 
-import javax.swing.JTextField;
-
-import javax.swing.JSeparator;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import java.awt.ScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.border.TitledBorder;
 import java.awt.FlowLayout;
 
 public class ClientView extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static JTextPane txtpnClientData = new JTextPane();
 	private Client myClient;
 	private JPanel editsPanel;
@@ -42,13 +38,6 @@ public class ClientView extends JPanel {
 		
 		txtpnClientData.setBounds(28, 70, 487, 409);
 		add(txtpnClientData);
-		
-		DefaultListModel dlm = new DefaultListModel();
-		
-//		ScrollPane scrollPane = new ScrollPane();
-//		scrollPane.setBounds(404, 165, 454, 309);
-//		scrollPane.add(clientHeadings);
-//		add(scrollPane);
 		
 		this.myClient = c;
 		
