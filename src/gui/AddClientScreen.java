@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 
 import java.awt.GridLayout;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -190,6 +191,7 @@ public class AddClientScreen extends JPanel {
 		add(btnCreateClient);
 	}
 	
+	
 	private void clearFields() {
 		lnameField.setText("");
 		fnameField.setText("");
@@ -198,10 +200,5 @@ public class AddClientScreen extends JPanel {
 		workField.setText("");
 		emailField.setText("");
 		occField.setText("");
-	}
-	
-	private boolean emptyFields() {
-		
-		return true;
 	}
 }

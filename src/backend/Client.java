@@ -54,10 +54,11 @@ public class Client implements Serializable{
     	addCase(new Case(this,ct));
     }
     
-    public Client(String fname, String lname) {
+    public Client(String fname, String lname, String email) {
     	this.clientId = getNextClientID();
     	this.fname = fname;
     	this.lname = lname;
+    	this.email = email;
     }
 
     public String getLname() {

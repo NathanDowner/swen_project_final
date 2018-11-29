@@ -60,13 +60,13 @@ public class Main{
 	
 	private void init() {
 		ArrayList<String[]> tData = new ArrayList<String[]>();
-		//                       cl0       ,cl1      ,cl2             ,cl3           ,cl4
-		tData.add(new String[] {"Nathan", "Downer", "Conveyancing","Surveyer's Fee", "15000.00"});
-		tData.add(new String[] {"Kayon-Marie", "Douglas", "Divorce","Process Server's Fee", "13500.00"});
-		tData.add(new String[] {"Nathaniel", "Chirstie", "Admin and Estate","Will Probation", "7500.00"});
-		tData.add(new String[] {"Hugh", "Billings", "Conveyancing","Lost Title Application", "9500"});
-		tData.add(new String[] {"Rajheem","O'Connor", "Misc", "Deedpoll Submission Fee (Rush)", "9000"});
-		tData.add(new String[] {"Akili", "Sterling", "Misc", "Consultancy Charge", "5500"});
+		//                       cl0       ,cl1      ,cl2             ,cl3           ,cl4               ,cl5
+		tData.add(new String[] {"Nathan", "Downer", "Conveyancing","Surveyer's Fee", "15000.00", "sterlingakili@gmail.com"});
+		tData.add(new String[] {"Kayon-Marie", "Douglas", "Divorce","Process Server's Fee", "13500.00", "sterlingakili@gmail.com"});
+		tData.add(new String[] {"Nathaniel", "Chirstie", "Admin and Estate","Will Probation", "7500.00", "sterlingakili@gmail.com"});
+		tData.add(new String[] {"Hugh", "Billings", "Conveyancing","Lost Title Application", "9500", "sterlingakili@gmail.com"});
+		tData.add(new String[] {"Rajheem","O'Connor", "Misc", "Deedpoll Submission Fee (Rush)", "9000", "sterlingakili@gmail.com"});
+		tData.add(new String[] {"Akili", "Sterling", "Misc", "Consultancy Charge", "5500", "sterlingakili@gmail.com"});
 		
 		
 //		clientList.add(new Client("Nathan", "Downer",CaseType.Conveyancing));
@@ -81,7 +81,7 @@ public class Main{
 		Case cse;
 		for (int i=0; i<tData.size(); i++) {
 			cl = tData.get(i);
-			c = new Client(cl[0],cl[1]);
+			c = new Client(cl[0],cl[1], cl[5]);
 			cse = new Case(c, CaseType.strToType(cl[2]));
 			cse.addCost(new Cost(cl[3],Double.parseDouble(cl[4])));
 			caseList.add(cse);

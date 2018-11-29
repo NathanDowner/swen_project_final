@@ -20,6 +20,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.border.TitledBorder;
 
+import Email.TLSEmail;
+
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -136,7 +138,11 @@ public class CaseView extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				String newStat = promptUser("Enter the new case status.");
 				//TODO fix exception when user cancels pop up instead of providing a response
+				String body = String.format("Dear %s,\n\t\tThere has been an update in the status of your case. It is as follows:\n", myCase.getClient().getFullName());
+				body += String.format("Previous status: %s\n", myCase.getStatus());
 				myCase.setStatus(newStat);
+				body += String.format("Current status: %s\n", myCase.getStatus());
+				new TLSEmail(myCase.getClient().getEmail(), "Case Status Update", body);
 				refresh("Status successfully updated.");
 			}
 		});
