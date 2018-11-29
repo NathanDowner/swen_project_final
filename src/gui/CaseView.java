@@ -3,20 +3,16 @@ package gui;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.util.ArrayList;
 
 import backend.*;
 
 import javax.swing.JTextField;
 
-import javax.swing.JSeparator;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.border.TitledBorder;
 
@@ -25,10 +21,12 @@ import Email.TLSEmail;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
 
 public class CaseView extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField caseSearch;
 	private static JTextPane txtpnCaseData = new JTextPane();//TODO remove static
 	JPanel editsPanel;

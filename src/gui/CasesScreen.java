@@ -23,11 +23,14 @@ import backend.*;
 public class CasesScreen extends JPanel {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
 	 * Create the panel.
 	 */
-	private ArrayList<Case> cases;
 	private JTextField searchTxtField;
-	private static JList caseList;
+	private static JList<Case> caseList = new JList<Case>();
 	private String clientName;
 	private String caseID;
 	
@@ -36,7 +39,6 @@ public class CasesScreen extends JPanel {
 	 * Create the panel.
 	 */
 	public CasesScreen() {
-		this.cases = Main.caseList;
 		setLayout(null);
 		
 		JLabel lblClients = new JLabel("CASES");
@@ -44,7 +46,6 @@ public class CasesScreen extends JPanel {
 		lblClients.setBounds(28, 10, 122, 37);
 		add(lblClients);
 		
-		caseList = new JList();
 		caseList.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
 //				Main.setCaseViewText(((Case)caseList.getSelectedValue()).toString2());
@@ -118,7 +119,7 @@ public class CasesScreen extends JPanel {
 
 
 	public static void loadCases(ArrayList<Case> list) {
-		DefaultListModel dlm = new DefaultListModel();
+		DefaultListModel<Case> dlm = new DefaultListModel<Case>();
 		for (Case c: list) {
 			dlm.addElement(c);
 		}

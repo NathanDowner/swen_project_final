@@ -15,8 +15,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JLabel;
 
 public class AddCaseScreen extends JPanel {
-	JList clientList;
-	JList caseTypeLst;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	JList<Client> clientList = new JList<Client>();
+	JList<CaseType> caseTypeLst = new JList<CaseType>();
 	/**
 	 * Create the panel.
 	 */
@@ -38,21 +42,19 @@ public class AddCaseScreen extends JPanel {
 		btnAddCase.setBounds(55, 268, 112, 45);
 		add(btnAddCase);
 		
-		caseTypeLst = new JList();
 		caseTypeLst.setBounds(55, 75, 112, 147);
 		add(caseTypeLst);
 		
-		DefaultListModel dlm = new DefaultListModel();
+		DefaultListModel<CaseType> dlm = new DefaultListModel<CaseType>();
 		for(CaseType ct: CaseType.values()) {
 			dlm.addElement(ct);
 		}
 		caseTypeLst.setModel(dlm);
 		
-		clientList = new JList();
 		clientList.setBounds(265, 75, 93, 147);
 		add(clientList);
 		
-		DefaultListModel deflm  = new DefaultListModel();
+		DefaultListModel<Client> deflm  = new DefaultListModel<Client>();
 		for (Client c: Main.clientList) {
 			deflm.addElement(c);
 		}

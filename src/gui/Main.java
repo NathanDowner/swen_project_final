@@ -1,12 +1,10 @@
 package gui;
 
-import java.awt.Container;
 import java.awt.Dimension;
 import java.util.ArrayList;
 
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import backend.*;
@@ -22,8 +20,6 @@ public class Main{
 	public static Dimension dim = new Dimension(900, 600);
 	public static Dimension popupDim = new Dimension(800, 600);
 	private JFrame mainFrame; 
-//	private Container mainPane;
-	private JPanel window;
 	private static FileManager fManage = new FileManager();
 	
 	public Main () {
@@ -102,7 +98,7 @@ public class Main{
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Main m = new Main();
+		new Main();
 	}
 	
 //	public static void setClientViewText(String text) {
