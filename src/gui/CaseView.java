@@ -43,7 +43,7 @@ public class CaseView extends JPanel {
 //		this.myCase = c;
 //	}
 	public CaseView(Case c) {
-		
+		this.setPreferredSize(Main.dim);
 		setLayout(null);
 		//TODO add close btn on case to remove the -1 index of the tab pane
 		JLabel lblClients = new JLabel("CASE VIEW");
@@ -62,7 +62,7 @@ public class CaseView extends JPanel {
 		
 		JPanel optionsPanel = new JPanel();
 		optionsPanel.setBorder(new TitledBorder(null, "Options", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		optionsPanel.setBounds(464, 295, 227, 82);
+		optionsPanel.setBounds(464, 295, 134, 82);
 		add(optionsPanel);
 		optionsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
@@ -86,15 +86,6 @@ public class CaseView extends JPanel {
 			}
 		});
 		optionsPanel.add(btnEditCase);
-		
-		JButton btnClose = new JButton("CLOSE");
-//		btnClose.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent arg0) {
-//				Main.tabbedMain.remove(Main.tabbedMain.getTabCount() -1);
-//			}
-//		});
-		btnClose.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
-		optionsPanel.add(btnClose);
 		
 //		ScrollPane scrollPane = new ScrollPane();
 //		scrollPane.setBounds(404, 165, 454, 309);
@@ -127,12 +118,12 @@ public class CaseView extends JPanel {
 				refresh("Progress successfully updated.");
 			}
 		});
-		btnInProgress.setBounds(6, 26, 122, 36);
+		btnInProgress.setBounds(6, 26, 122, 21);
 		editsPanel.add(btnInProgress);
 		
 		JButton btnUpdateStatus = new JButton("Update Status");
 		
-		btnUpdateStatus.setBounds(6, 72, 122, 36);
+		btnUpdateStatus.setBounds(6, 57, 122, 21);
 		editsPanel.add(btnUpdateStatus);
 		btnUpdateStatus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -141,16 +132,17 @@ public class CaseView extends JPanel {
 				String body = String.format("Dear %s,\n\t\tThere has been an update in the status of your case. It is as follows:\n", myCase.getClient().getFullName());
 				body += String.format("Previous status: %s\n", myCase.getStatus());
 				myCase.setStatus(newStat);
+				refresh("Status successfully updated.");
 				body += String.format("Current status: %s\n", myCase.getStatus());
 				new TLSEmail(myCase.getClient().getEmail(), "Case Status Update", body);
-				refresh("Status successfully updated.");
+				
 			}
 		});
 		
 		JButton btnAddContact = new JButton("Add Contact");
-		btnAddContact.setBounds(6, 118, 122, 36);
+		btnAddContact.setBounds(6, 88, 122, 21);
 		editsPanel.add(btnAddContact);
-		
+		//TODO add popup for collecting contact info
 		JButton btnAddCost = new JButton("Add Cost");
 		btnAddCost.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -175,8 +167,17 @@ public class CaseView extends JPanel {
 //			
 			}
 		});
-		btnAddCost.setBounds(6, 164, 122, 41);
+		btnAddCost.setBounds(6, 119, 122, 21);
 		editsPanel.add(btnAddCost);
+		
+		JButton btnAddFile = new JButton("Add File");
+		btnAddFile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		btnAddFile.setBounds(6, 150, 122, 21);
+		editsPanel.add(btnAddFile);
 		setTxtPane(c.toString2());
 		
 	}

@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JLabel;
 
 public class AddCaseScreen extends JPanel {
@@ -31,6 +32,7 @@ public class AddCaseScreen extends JPanel {
 				Main.caseList.add(c);
 				Main.updateFile();
 				CasesScreen.loadCases(Main.caseList);
+				JOptionPane.showMessageDialog(null, "Case Successfully Added");
 			}
 		});
 		btnAddCase.setBounds(55, 268, 112, 45);

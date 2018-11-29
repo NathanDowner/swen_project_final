@@ -19,7 +19,8 @@ public class Main{
 	public static JTabbedPane tabbedMain = new JTabbedPane(JTabbedPane.LEFT);
 //	private CasesScreen caseScreenTab = new CasesScreen();
 	
-	
+	public static Dimension dim = new Dimension(900, 600);
+	public static Dimension popupDim = new Dimension(800, 600);
 	private JFrame mainFrame; 
 //	private Container mainPane;
 	private JPanel window;
@@ -34,7 +35,7 @@ public class Main{
 			clientList = fManage.getClients();
 		}
 		mainFrame = new JFrame("Johnson & Downer Client and Case Management System");
-		mainFrame.setPreferredSize((new Dimension(800, 500)));
+		mainFrame.setPreferredSize(dim);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 //		 creating the tabbed pane

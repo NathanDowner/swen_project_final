@@ -17,6 +17,7 @@ public class Case implements Serializable{
     private ArrayList<Cost> caseCosts=new ArrayList<Cost>();
     private CaseType caseType;
     private ArrayList<Contact> contact=new ArrayList<Contact>();
+    private ArrayList<File> caseFiles = new ArrayList<File>();
     private LocalDateTime endDate;
     private boolean inProgress;
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");  
@@ -41,6 +42,10 @@ public class Case implements Serializable{
     
     public Client getClient() {
     	return this.client;
+    }
+    
+    public void addFile(File f) {
+    	this.caseFiles.add(f);
     }
     
     private static String getNextCaseId() {
@@ -155,6 +160,7 @@ public class Case implements Serializable{
     	if (getEndDate() != null) {
     		resp += "End Date: " + getDateStr(getEndDate()) + "\n";
     	}
+    	//TODO add out contacts
     	return resp;
     }
     

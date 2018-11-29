@@ -5,6 +5,7 @@ import java.util.Properties;
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
+import javax.swing.JOptionPane;
 
 public class TLSEmail {
 
@@ -35,6 +36,7 @@ public class TLSEmail {
 		Session session = Session.getInstance(props, auth);
 		
 		EmailUtil.sendEmail(session, toEmail, heading, body);
+		JOptionPane.showMessageDialog(null,"Email Sent Successfully!");
 		System.out.println("EMail Sent Successfully!!");
 	}	
 }

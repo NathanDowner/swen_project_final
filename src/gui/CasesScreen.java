@@ -52,7 +52,7 @@ public class CasesScreen extends JPanel {
 				//TODO figure out why its opening two slides;
 				JFrame caseViewFrame = new JFrame(o.getCaseTitle());
 				caseViewFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				caseViewFrame.setPreferredSize(new Dimension(600,550));//TODO pass dimension from main
+				caseViewFrame.setPreferredSize(Main.popupDim);//TODO pass dimension from main
 				caseViewFrame.getContentPane().add(new CaseView(o));
 				caseViewFrame.pack();
 				caseViewFrame.setVisible(true);

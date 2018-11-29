@@ -51,7 +51,7 @@ public class ClientsScreen extends JPanel {
 				Client cl = (Client)clientList.getSelectedValue();
 				JFrame clientViewFrame = new JFrame(cl.getFullName());
 				clientViewFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				clientViewFrame.setPreferredSize(new Dimension(600,550));//TODO pass dimension from main
+				clientViewFrame.setPreferredSize(Main.popupDim);//TODO pass dimension from main
 				clientViewFrame.getContentPane().add(new ClientView(cl));
 				clientViewFrame.pack();
 				clientViewFrame.setVisible(true);
