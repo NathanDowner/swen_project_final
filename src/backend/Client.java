@@ -150,6 +150,10 @@ public class Client implements Serializable{
     public void addCase(Case c) {
         cases.add(c);
     }
+    
+    public void addAddress(Address a) {
+    	this.addresses.add(a);
+    }
 
     @Override
     public String toString() {
@@ -165,8 +169,15 @@ public class Client implements Serializable{
                 "Homephone:    " + homePhone + "\n" +
                 "Mobilephone:  " + mobilePhone + "\n" +
                 "Email:        " + email + "\n" +
-                "Occupation:   " + occupation + "\n" +
-                "\nCases:\n________________________________________________________________\n";
+                "Occupation:   " + occupation + "\n";
+        if (addresses != null) {
+             text += "\nAddresses:\n________________________________________________________________\n";
+            for (Address a: addresses) {
+            	text += a.toString() + "\n";
+            }
+        }
+         
+        text += "Cases:\n________________________________________________________________\n";
         for (Case c: cases){
         	text += c.getCaseId()+"/ "+c.getCaseTypeStr()+"\n";
        }

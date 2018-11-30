@@ -28,7 +28,6 @@ public class CaseView extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JTextField caseSearch;
 	private static JTextPane txtpnCaseData = new JTextPane();//TODO remove static
 	JPanel editsPanel;
 	private Case myCase;
@@ -51,11 +50,6 @@ public class CaseView extends JPanel {
 		lblClients.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblClients.setBounds(28, 10, 122, 37);
 		add(lblClients);
-		
-		caseSearch = new JTextField();
-		caseSearch.setBounds(743, 280, 96, 19);
-		add(caseSearch);
-		caseSearch.setColumns(10);
 		txtpnCaseData.setEditable(false);
 		
 		txtpnCaseData.setBounds(28, 70, 396, 307);

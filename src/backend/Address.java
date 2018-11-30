@@ -8,6 +8,10 @@ import java.io.Serializable;
 public class Address implements Serializable{
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
      * Default constructor
      */
     private AddressType type;
@@ -81,13 +85,9 @@ public class Address implements Serializable{
 
     @Override
     public String toString() {
-        return "Address{" +
-                "type=" + type +
-                ", line1='" + line1 + '\'' +
-                ", line2='" + line2 + '\'' +
-                ", country='" + country + '\'' +
-                ", zip='" + zip + '\'' +
-                '}';
+        return "Type: " + type.getStr() + "\n" + 
+        		"Line 1: "+ this.line1 + "\n" +
+        		"Country" + this.country;
     }
 
 }

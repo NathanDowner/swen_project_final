@@ -18,6 +18,9 @@ public class DocPane extends JPanel {
 	public static File fileName;
 	private boolean fileCreated = false;
 	private String docName;
+	
+	private static final long serialVersionUID = 1L;
+	private JTextField fNameField;
 
 	/**
 	 * Create the panel.
