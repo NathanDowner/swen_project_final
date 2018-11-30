@@ -196,7 +196,7 @@ public class AddClientScreen extends JPanel {
 		adrLine1Field.setColumns(10);
 		
 		JLabel lblNewLabel_10 = new JLabel("Country:");
-		lblNewLabel_10.setBounds(10, 91, 45, 13);
+		lblNewLabel_10.setBounds(10, 91, 55, 13);
 		panel_2.add(lblNewLabel_10);
 		
 		adrCountryField = new JTextField();

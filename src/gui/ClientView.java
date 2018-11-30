@@ -98,6 +98,8 @@ public class ClientView extends JPanel {
 		editsPanel.add(btnAddCase);
 		
 		JButton btnAddAddress = new JButton("Add Address");
+		btnAddAddress.setBounds(10, 178, 109, 21);
+		editsPanel.add(btnAddAddress);
 		btnAddAddress.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JPanel addrPrompt = new JPanel();
@@ -120,12 +122,9 @@ public class ClientView extends JPanel {
 				int result = JOptionPane.showConfirmDialog(null,addrPrompt, 
 						"Enter address info.", JOptionPane.OK_CANCEL_OPTION);
 				if (result == JOptionPane.OK_OPTION) {
-					//System.out.println("1\n");
-					//System.out.println(addrType.getText()+"\n");
-					//System.out.println("2");
-					//AddressType a = AddressType.strToType(addrType.getText());
-					//String b = line1.getText();
-					//String c = country.getText();
+					System.out.println("1\n");
+					System.out.println(line1.getText()+"\n");
+					System.out.println("2");
 					AddressType a = AddressType.strToType(addrType.getText());
 					String b = line1.getText();
 					String c = country.getText();
@@ -135,8 +134,7 @@ public class ClientView extends JPanel {
 				}
 			}
 		});
-		btnAddAddress.setBounds(10, 178, 109, 21);
-		editsPanel.add(btnAddAddress);
+		
 		btnAddCase.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//TODO add JFrame for new case and set the client and case lists again

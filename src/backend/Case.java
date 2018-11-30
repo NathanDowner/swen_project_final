@@ -158,7 +158,7 @@ public class Case implements Serializable{
     	+ "In Progress:" + isInProgress() + "\n"
     	+ "Start Date: " + getDateStr(getStartDate()) + "\n"
     	+ "Case Type:  "+ getCaseTypeStr()+"\n";
-    	if (getEndDate() != null) {
+    	if (isInProgress() != true) {
     		resp += "End Date: " + getDateStr(getEndDate()) + "\n";
     	}
     	resp += "Files:\n____________________________________________________________\n";

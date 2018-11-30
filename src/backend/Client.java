@@ -171,13 +171,13 @@ public class Client implements Serializable{
                 "Email:        " + email + "\n" +
                 "Occupation:   " + occupation + "\n";
         if (addresses != null) {
-             text += "\nAddresses:\n________________________________________________________________\n";
+             text += "Addresses:\n________________________________________________________________\n";
             for (Address a: addresses) {
             	text += a.toString() + "\n";
             }
         }
          
-        text += "Cases:\n________________________________________________________________\n";
+        text += "\nCases:\n________________________________________________________________\n";
         for (Case c: cases){
         	text += c.getCaseId()+"/ "+c.getCaseTypeStr()+"\n";
        }
