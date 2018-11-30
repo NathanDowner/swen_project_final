@@ -186,6 +186,7 @@ public class AddClientScreen extends JPanel {
 					clearFields();
 					Main.updateFile();
 					ClientsScreen.loadClients(Main.clientList);
+					AddCaseScreen.resetClientList();
 				}
 			}
 		});
