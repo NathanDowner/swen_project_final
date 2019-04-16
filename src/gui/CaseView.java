@@ -124,7 +124,7 @@ public class CaseView extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				String newStat = promptUser("Enter the new case status.");
 				//TODO fix exception when user cancels pop up instead of providing a response
-				String body = String.format("Dear %s,\n\t\tThere has been an update in the status of your case. It is as follows:\n", myCase.getClient().getFullName());
+				String body = String.format("Dear %s,\n\n\t\tThere has been an update in the status of your case. It is as follows:\n", myCase.getClient().getFullName());
 				body += String.format("Previous status: %s\n", myCase.getStatus());
 				myCase.setStatus(newStat);
 				refresh("Status successfully updated.");
