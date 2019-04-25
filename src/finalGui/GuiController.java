@@ -21,7 +21,15 @@ import backend.User;
 import backend.types.CaseType;
 import backend.types.UserType;
 
-import finalGui.eventListeners.*;
+import finalGui.eventListeners.SearchListener;
+import finalGui.eventListeners.AddCaseListener;
+import finalGui.eventListeners.AddCaseEvent;
+import finalGui.eventListeners.AddClientEvent;
+import finalGui.eventListeners.AddClientListener;
+import finalGui.eventListeners.AddUserEvent;
+import finalGui.eventListeners.AddUserListener;
+import finalGui.eventListeners.LoginListener;
+import finalGui.eventListeners.LoginEvent;
 
 public class GuiController extends JFrame {
 	private ArrayList<Client> clientList = new ArrayList<Client>();

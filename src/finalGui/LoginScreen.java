@@ -36,22 +36,6 @@ public class LoginScreen extends JPanel{
 		initialize(); 
 	}
 	
-//	public void setTime() {
-//		timeLabel.setText(DateUtil.today());		
-//	}
-
-//	private void getEnteredUsername() {
-//		username = usernameField.getText();
-//	}
-	
-//	private void getEnteredPassword() {
-//		password = new String(passwordField.getPassword());
-//	}
-	
-//	public User getUser() {
-//		return tempUser;
-//	}
-	
 	public void setMessage(String text) {
 		loginInstructions.setText(text);
 	}
@@ -79,37 +63,20 @@ public class LoginScreen extends JPanel{
 		passwordField.setHorizontalAlignment(SwingConstants.CENTER);
 		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		passwordField.setBounds(924, 507, 187, 28);
-//		passwordField.addActionListener( new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				getEnteredUsername();
-//				getEnteredPassword();
-//				tempUser = new User(username, password);
-//			}
-//		});
+
 		this.add(passwordField);
 		
 		usernameField = new JTextField();
 		usernameField.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		usernameField.setHorizontalAlignment(SwingConstants.CENTER);
 		usernameField.setBounds(924, 387, 187, 28);
-//		usernameField.addActionListener( new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				getEnteredUsername();
-//				getEnteredPassword();
-//				tempUser = new User(username, password);
-//			}
-//		});
-		this.add(usernameField);
+		add(usernameField);
 		
 		loginInstructions = new JLabel("Kindly enter your login details below,");
 		loginInstructions.setHorizontalAlignment(SwingConstants.CENTER);
 		loginInstructions.setFont(new Font("Segoe Print", Font.PLAIN, 16));
 		loginInstructions.setBounds(729, 257, 496, 89);
 		add(loginInstructions);
-		
-//		timeLabel.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-//		timeLabel.setBounds(960, 670, 134, 28);
-//		add(timeLabel);
 		
 		headerPanel = new JPanel();
 		headerPanel.setBackground(new Color(255, 228, 196));
