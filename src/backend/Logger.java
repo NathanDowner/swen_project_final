@@ -46,7 +46,7 @@ public class Logger {
     }
     
     public void recordActivity(User u, String info) {
-        info = u.getUsername() + " " + info;
+        info = "[" + u.getUsername() + "] " + info;
         recordActivity(info);
     }
     
