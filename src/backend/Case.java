@@ -1,25 +1,24 @@
 package backend;
-
-
 import java.io.File;
 import java.io.Serializable;
-import java.util.*;
-import java.time.format.DateTimeFormatter;  
-import java.time.LocalDateTime; 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+
+import backend.types.CaseType; 
+import backend.types.CaseStatus;
 
 public class Case implements Serializable{
 	private static int lastId = 0;
-	private String caseTitle;
-    private String caseId;
+	private String caseTitle, caseId, lastAction;
+    private CaseType caseType;
+    private CaseStatus status;
     private Client client;
     private LocalDateTime startDate;
-    private String status;
     private ArrayList<Cost> caseCosts=new ArrayList<Cost>();
-    private CaseType caseType;
     private ArrayList<Contact> contact=new ArrayList<Contact>();
     private ArrayList<File> caseFiles = new ArrayList<File>();
     private LocalDateTime endDate;
-    private boolean inProgress;
     private static String dtfString = "dd/MM/yyyy HH:mm:ss";
 //    LocalDateTime time; 
 
@@ -29,10 +28,9 @@ public class Case implements Serializable{
     	this.startDate = LocalDateTime.now();
     	this.caseType = type;
     	this.caseCosts.add(type.getBaseFee());
-    	this.caseTitle = type.getCaseType() +" - "+ client.getFullName();
-    	this.status = "Case file opened";
-    	this.inProgress = true;
-//    	this.caseTitle = type.getCaseType()+"-"+getCaseId();
+    	this.caseTitle = type.toString() +" - "+ client.getFullName();
+    	this.lastAction = "Case opened";
+    	this.status = CaseStatus.Open;
     }
     
     public Case() {
@@ -40,7 +38,15 @@ public class Case implements Serializable{
     	this.startDate = LocalDateTime.now();
     }
     
-    public Client getClient() {
+    public String getLastAction() {
+		return lastAction;
+	}
+
+	public void setLastAction(String lastAction) {
+		this.lastAction = lastAction;
+	}
+
+	public Client getClient() {
     	return this.client;
     }
     
@@ -70,12 +76,14 @@ public class Case implements Serializable{
     }
 
 
-    public String getStatus() {
+    public CaseStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(CaseStatus status) {
         this.status = status;
+        if (status == CaseStatus.Closed)
+        	this.endDate = LocalDateTime.now();
     }
 
     public ArrayList<Cost> getCaseCosts() {
@@ -125,24 +133,9 @@ public class Case implements Serializable{
     public LocalDateTime getEndDate() {
         return endDate;
     }
-
-    public boolean isInProgress() {
-        return inProgress;
-    }
-
-    public void setInProgress(boolean inProgress) {
-    	if (inProgress == false) {
-    		this.endDate = LocalDateTime.now();
-    	}
-        this.inProgress = inProgress;
-    }
     
     public String getCaseTitle() {
     	return this.caseTitle;
-    }
-    
-    public String getCaseTypeStr() {
-    	return this.caseType.getCaseType();
     }
     
     public String toString() {
@@ -154,11 +147,11 @@ public class Case implements Serializable{
     	String resp;
     	resp = "Case Id:   " + getCaseId() + "\n"
     	+ "Case Title: " + getCaseTitle() + "\n"
-    	+ "Current Status:" + getStatus() + "\n"
-    	+ "In Progress:" + isInProgress() + "\n"
+    	+ "Case Type:  "+ getCaseType()+"\n"
     	+ "Start Date: " + getDateStr(getStartDate()) + "\n"
-    	+ "Case Type:  "+ getCaseTypeStr()+"\n";
-    	if (isInProgress() != true) {
+    	+ "Status:" + getStatus() + "\n"
+    	+ "Last Action:" + getLastAction() + "\n";
+    	if (status == CaseStatus.Closed) {
     		resp += "End Date: " + getDateStr(getEndDate()) + "\n";
     	}
     	resp += "Files:\n____________________________________________________________\n";

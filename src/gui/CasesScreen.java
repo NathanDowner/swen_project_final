@@ -38,6 +38,7 @@ public class CasesScreen extends JPanel {
 	 * Create the panel.
 	 */
 	public CasesScreen() {
+		System.out.println("using old cases screen");
 		setLayout(null);
 		
 		JLabel lblClients = new JLabel("CASES");

@@ -1,5 +1,6 @@
 package backend;
 
+import backend.types.AddressType;
 import java.io.Serializable;
 
 /**
@@ -18,27 +19,24 @@ public class Address implements Serializable{
     private String line1;
     private String line2;
     private String country;
-    private String zip;
-
-    public Address(AddressType type, String line1, String line2, String country, String zip) {
-
-        this.type = type;
-        this.line1 = line1;
-        this.line2 = line2;
-        this.country = country;
-        this.zip = zip;
-    }
     
-    public Address(AddressType type, String line1, String country) {
-    	this.type = type;
+    public Address(String type, String line1, String line2, String country) {
+    	this.type = AddressType.strToType(type);
     	this.line1 = line1;
+    	this.line2 = line2;
     	this.country = country;
     }
 
     public Address() {
     }
 
-    public AddressType getType() {
+	public Address(AddressType adrT, String line1, String country) {
+		this.type = adrT;
+		this.line1= line1;
+		this.country = country;
+	}
+
+	public AddressType getType() {
         return type;
     }
 
@@ -70,14 +68,6 @@ public class Address implements Serializable{
         this.country = country;
     }
 
-    public String getZip() {
-        return zip;
-    }
-
-    public void setZip(String zip) {
-        this.zip = zip;
-    }
-
     public AddressType getAddressType() {
         // TODO implement here
         return null;
@@ -85,9 +75,14 @@ public class Address implements Serializable{
 
     @Override
     public String toString() {
-        return "Type: " + type.getStr() + "\n" + 
-        		"Line 1: "+ this.line1 + "\n" +
-        		"Country" + this.country;
+    	String op = "";
+        op += "Type: " + type + "\n" + 
+        		"Line 1: "+ this.line1 + "\n";
+        if (line2 != null) {
+        	op += "Line 2: " + this.line2 + "\n";
+        }
+        op += "Country: " + this.country;
+        return op;
     }
 
 }

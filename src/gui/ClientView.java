@@ -9,6 +9,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 
 import backend.*;
+import backend.types.AddressType;
+import backend.types.CaseType;
 
 import javax.swing.JOptionPane;
 import javax.swing.DefaultListModel;
@@ -63,7 +65,7 @@ public class ClientView extends JPanel {
 		btnEmail.setBounds(10, 23, 109, 21);
 		editsPanel.add(btnEmail);
 		
-		JButton btnHomePhone = new JButton("home phone");
+		JButton btnHomePhone = new JButton("Home Phone");
 		btnHomePhone.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				myClient.setHomePhone(promptUser("Enter updated home phone number."));
@@ -73,9 +75,10 @@ public class ClientView extends JPanel {
 		btnHomePhone.setBounds(10, 54, 109, 21);
 		editsPanel.add(btnHomePhone);
 		
-		JButton btnMobilePhone = new JButton("mobile phone");
+		JButton btnMobilePhone = new JButton("Mobile Phone");
 		btnMobilePhone.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				//TODO update this so they can select the number to edit
 				myClient.setMobilePhone(promptUser("Enter updated mobile phone number."));
 				refresh("Mobile  Phone Number successfully updated");
 			}
@@ -172,7 +175,7 @@ public class ClientView extends JPanel {
 		JButton btnEditClient = new JButton("Edit Client");
 		btnEditClient.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				editsPanel.setVisible(true);
+				editsPanel.setVisible(!editsPanel.isVisible());
 			}
 		});
 		panel_1.add(btnEditClient);

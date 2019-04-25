@@ -3,7 +3,7 @@ package gui;
 import javax.swing.JPanel;
 
 import backend.Case;
-import backend.CaseType;
+import backend.types.CaseType;
 import backend.Client;
 
 import javax.swing.DefaultListModel;

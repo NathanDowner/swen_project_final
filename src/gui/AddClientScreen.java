@@ -13,7 +13,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.border.LineBorder;
 
 import backend.Address;
-import backend.AddressType;
+import backend.types.AddressType;
 import backend.Client;
 import backend.FileManager;
 
@@ -25,9 +25,6 @@ import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 
 public class AddClientScreen extends JPanel {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField lnameField;
 	private JTextField fnameField;
@@ -233,7 +230,7 @@ public class AddClientScreen extends JPanel {
 					ArrayList<Address> addresses = new ArrayList<Address>();
 					addresses.add(address);
 					
-					Main.clientList.add(new Client(lname, fname, homePhone, mobilePhone, workPhone, email, occupation, addresses));
+					Main.clientList.add(new Client(fname, lname, email, occupation, addresses));
 					JOptionPane.showMessageDialog(null, "Client successfully created.");
 					clearFields();
 					Main.updateFile();

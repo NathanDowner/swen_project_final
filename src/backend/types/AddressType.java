@@ -1,4 +1,4 @@
-package backend;
+package backend.types;
 
 import java.io.Serializable;
 
@@ -15,14 +15,14 @@ public enum AddressType implements Serializable{
     	this.addrType = type;
     }
     
-    public String getStr() {
+    public String toString() {
     	return this.addrType;
     }
     
     public static AddressType strToType(String s) {
     	System.out.println("Got to addr");
     	for(AddressType at: AddressType.values()) {
-    		if (s.toLowerCase() == at.getStr().toLowerCase()) {
+    		if (s.toLowerCase() == at.toString().toLowerCase()) {
     			return at;
     		}
     	} return AddressType.Home;

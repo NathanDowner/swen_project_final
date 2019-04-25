@@ -2,44 +2,31 @@ package backend;
 
 import java.io.Serializable;
 import java.util.*;
+import backend.types.AddressType;
+import backend.types.CaseType;
+import backend.types.PhoneNumType;
 
-/**
- * 
- */
+
 public class Client implements Serializable{
 	private static int clientNo = 0;
     private String lname;
     private String clientId;
     private String fname;
-    private String homePhone;
-    private String mobilePhone;
-    private String workPhone;
+    private ArrayList<Phone> phones;
+    private Id id;
     private String email;
     private String occupation;
     private ArrayList<Address> addresses;
     private ArrayList<Case> cases = new ArrayList<Case>();
 
-    public Client(String lname, String fname, String mname, String alias, String motherMaiden, String dob, String birthPlace, String nationality, String homePhone, String mobilePhone, String workPhone, String email, String occupation, String natureOfBus, String nameOfBus, String busPhone, String busFax, Enum idType, String idNum, String idExp, String sourceOfFunds, String trn, String publicFunctionMem, ArrayList<Address> addresses) {
-        this.lname = lname;
-        this.clientId = getNextClientID();
-        this.fname = fname;
-        this.homePhone = homePhone;
-        this.mobilePhone = mobilePhone;
-        this.workPhone = workPhone;
-        this.email = email;
-        this.occupation = occupation;
-        this.addresses = addresses;
-    }
     
-    public Client(String lname, String fname, String homePhone, String mobilePhone, String workPhone, String email, String occupation, ArrayList<Address> addresses) {
+    public Client(String fname, String lname, String email, String occupation, ArrayList<Address> addresses, ArrayList<Phone> phones) {
+    	this.clientId = getNextClientID();
+    	this.fname = fname;
         this.lname = lname;
-        this.clientId = getNextClientID();
-        this.fname = fname;
-        this.homePhone = homePhone;
-        this.mobilePhone = mobilePhone;
-        this.workPhone = workPhone;
         this.email = email;
         this.occupation = occupation;
+        this.phones = phones;
         this.addresses = addresses;
     }
     
@@ -60,6 +47,10 @@ public class Client implements Serializable{
     	this.lname = lname;
     	this.email = email;
     }
+    
+    public void addPhone(Phone p) {
+    	this.phones.add(p);
+    }
 
     public String getLname() {
         return lname;
@@ -76,6 +67,10 @@ public class Client implements Serializable{
     public String getClientId() {
         return clientId;
     }
+    
+    public void setId(Id id) {
+    	this.id = id;
+    }
 
     public void setClientId(String clientId) {
         this.clientId = clientId;
@@ -89,29 +84,6 @@ public class Client implements Serializable{
         this.fname = fname;
     }
 
-    public String getHomePhone() {
-        return homePhone;
-    }
-
-    public void setHomePhone(String homePhone) {
-        this.homePhone = homePhone;
-    }
-
-    public String getMobilePhone() {
-        return mobilePhone;
-    }
-
-    public void setMobilePhone(String mobilePhone) {
-        this.mobilePhone = mobilePhone;
-    }
-
-    public String getWorkPhone() {
-        return workPhone;
-    }
-
-    public void setWorkPhone(String workPhone) {
-        this.workPhone = workPhone;
-    }
 
     public String getEmail() {
         return email;
@@ -147,6 +119,24 @@ public class Client implements Serializable{
     	return ans;
     }
     
+    public void setHomePhone(String num) {
+    	for (Phone p: phones) {
+    		if (p.getType() == PhoneNumType.Home)
+    			p.setNumber(num);
+    	}
+    }
+    
+    public void setMobilePhone(String num) {
+    	for (Phone p: phones) {
+    		if (p.getType() == PhoneNumType.Mobile)
+    			p.setNumber(num);
+    	}
+    }
+    
+    public String getNameForSearch() {
+    	return this.fname + " " + this.lname;
+    }
+    
     public void addCase(Case c) {
         cases.add(c);
     }
@@ -164,22 +154,22 @@ public class Client implements Serializable{
     	String text = "";
     	
         text = "Name:          " + fname + " " + lname + "\n" +
-                "ID:           " + clientId + "\n" +
-                //String.format("Address:      %s\n", addresses.get(0).toString()) +
-                "Homephone:    " + homePhone + "\n" +
-                "Mobilephone:  " + mobilePhone + "\n" +
-                "Email:        " + email + "\n" +
+                "Id:           " + clientId + "\n";
+        if (phones != null) {
+        	for (Phone p : phones)
+        		text += p.getType() + "    " + p.getNumber() + "\n";        	
+        }
+            
+        text += "Email:        " + email + "\n" +
                 "Occupation:   " + occupation + "\n";
         if (addresses != null) {
-             text += "Addresses:\n________________________________________________________________\n";
-            for (Address a: addresses) {
-            	text += a.toString() + "\n";
-            }
+             text += "\nAddresses:\n---------------------------------------------------------------\n";
+            for (Address a: addresses)
+            	text += a.toString() + "\n\n";
         }
-         
-        text += "\nCases:\n________________________________________________________________\n";
+        text += "\nCases:\n----------------------------------------------------------------\n";
         for (Case c: cases){
-        	text += c.getCaseId()+"/ "+c.getCaseTypeStr()+"\n";
+        	text += c.getCaseId()+"/ "+c.getCaseType()+"\n";
        }
         return text;
     }

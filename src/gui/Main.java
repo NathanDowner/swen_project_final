@@ -4,7 +4,8 @@ import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
-
+import backend.types.CaseType;
+import finalGui.AddClient;
 
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
@@ -12,12 +13,13 @@ import javax.swing.JTabbedPane;
 import backend.*;
 
 public class Main{
+	//Panels
+	private AddClient addClientPanel = new AddClient();
+	
+	
 	public static ArrayList<Client> clientList = new ArrayList<Client>();
-	public static ArrayList<Case> caseList = new ArrayList<Case>(); 
-//	private static ClientView clientViewTab = new ClientView();
-//	private CaseView caseViewTab = new CaseView();
-	public static JTabbedPane tabbedMain = new JTabbedPane(JTabbedPane.LEFT);
-//	private CasesScreen caseScreenTab = new CasesScreen();
+	public static ArrayList<Case> caseList = new ArrayList<Case>();
+	public static JTabbedPane tabbedMain = new JTabbedPane(JTabbedPane.TOP);
 	
 	public static Dimension dim = new Dimension(900, 600);
 	public static Dimension popupDim = new Dimension(800, 600);
@@ -46,12 +48,9 @@ public class Main{
 	    });
 		
 //		 creating the tabbed pane
-//		tabbedMain = new JTabbedPane(JTabbedPane.LEFT);
 		tabbedMain.addTab("Clients",new ClientsScreen());
 		tabbedMain.addTab("Cases", new CasesScreen());
-//		tabbedMain.addTab("Case View", caseViewTab);
-//		tabbedMain.addTab("Client View", clientViewTab);
-		tabbedMain.addTab("Add Client", new AddClientScreen());
+		tabbedMain.addTab("Add Client", new AddClient());
 		tabbedMain.addTab("Add Case", new AddCaseScreen());
 		
 //		window = new searchScreen(clientList);
@@ -77,14 +76,6 @@ public class Main{
 		tData.add(new String[] {"Hugh", "Billings", "Conveyancing","Lost Title Application", "9500", "sterlingakili@gmail.com"});
 		tData.add(new String[] {"Rajheem","O'Connor", "Misc", "Deedpoll Submission Fee (Rush)", "9000", "sterlingakili@gmail.com"});
 		tData.add(new String[] {"Akili", "Sterling", "Misc", "Consultancy Charge", "5500", "sterlingakili@gmail.com"});
-		
-		
-//		clientList.add(new Client("Nathan", "Downer",CaseType.Conveyancing));
-//		clientList.add(new Client("Kayon-Marie", "Douglas", CaseType.Divorce));
-//		clientList.add(new Client("Nathaniel", "Chirstie", CaseType.AdministrationAndEstate));
-//		clientList.add(new Client("Hugh", "Billings", CaseType.Conveyancing));
-//		clientList.add(new Client("Rajheem","O'Connor", CaseType.Misc));
-//		clientList.add(new Client("Akili", "Sterling", CaseType.Misc));
 		
 		Client c;
 		String[] cl;
@@ -113,14 +104,6 @@ public class Main{
 		// TODO Auto-generated method stub
 		new Main();
 	}
-	
-//	public static void setClientViewText(String text) {
-//		clientViewTab.setTxtPane(text);
-//	}
-	
-//	public static void setCaseViewText(String text) {
-//		caseViewTab.setTxtPane(text);
-//	}
-	
+		
 
 }

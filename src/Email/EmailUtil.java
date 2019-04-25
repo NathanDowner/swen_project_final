@@ -21,7 +21,7 @@ public class EmailUtil {
 	
 	private static String address = "johndownlaw@gmail.com";
 	private static String senderName = "Johnson & Downer Law Firm";
-	private static String password= "";
+	private static String password= "johndownlaw2140";
 
 	/**
 	 * Utility method to send simple HTML email
