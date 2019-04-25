@@ -31,6 +31,7 @@ public class FileManager {
      * @return The function returns true if the lists were successfully saved, false otherwise.
      */
     public static boolean saveData(ArrayList<Case> caseList, ArrayList<Client> clientList){
+    	System.out.println("Calling save data");
         try{
             FileOutputStream fos;
             ObjectOutputStream oos;

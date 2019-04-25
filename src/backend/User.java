@@ -1,50 +1,62 @@
 package backend;
+import java.io.Serializable;
 
-import java.util.*;
-import java.io.*;
+import backend.types.UserType;
 
-public class User implements Comparable{
-    
-    private String username, password, fName, lName;
-    
-    public User(String username, String password){
-        this.username = username;
-        this.password = password;
-    }
-    
-    public User(String username, String password, String fName, String lName){
-        this.username = username;
-        this.password = password;
-        this.fName = fName;
-        this.lName = lName;
-    }
-    
-    public String getUsername(){
-        return this.username;
-    }
-    
-    public String getPassword(){
-        return this.password;
-    }
-    
-    public String getFullName() {
-    	return this.fName + " " + this.lName;
-    }
-    
-    public String getFName() {
-    	return this.fName;
-    }
-    
-    @Override
-    public int compareTo(Object o){
-        if(username.equals(((User)o).getUsername()) && password.equals(((User)o).getPassword())){
-            return 0;
-        }
-        else if(username.equals(((User)o).getUsername())){
-            return 1;
-        }
-        else{
-            return -1;
-        }
-    }
+public class User implements Comparable<User>, Serializable{
+	private String username, password, fname, lname;
+	private UserType type;
+	
+	public User(String fname, String lname, String username, String password, UserType type) {
+		this.username = username;
+		this.password = password;
+		this.fname = fname;
+		this.lname = lname;
+		this.type = type;
+	}
+	
+	public User(String username, String password) {
+		this.username = username;
+		this.password = password;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public UserType getType() {
+		return type;
+	}
+
+	public void setType(UserType type) {
+		this.type = type;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+	
+	public String getFname() {return this.fname;}
+	
+	public String getLname() {return this.lname;}
+	
+	public String toString() {
+		return fname + " " + lname;
+	}
+
+	public int compareTo(User u) {
+		if (this.username.equals(u.getUsername()) && this.password.equals(u.getPassword())) {
+			return 0;
+		} else if (this.username.equals(u.getUsername())) {
+			return 1;
+		} else {
+			return -1;
+		}
+	}
+		
+	
 }

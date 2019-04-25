@@ -18,6 +18,10 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 public class EmailUtil {
+	
+	private static String address = "johndownlaw@gmail.com";
+	private static String senderName = "Johnson & Downer Law Firm";
+	private static String password= "johndownlaw2140";
 
 	/**
 	 * Utility method to send simple HTML email
@@ -35,9 +39,9 @@ public class EmailUtil {
 	      msg.addHeader("format", "flowed");
 	      msg.addHeader("Content-Transfer-Encoding", "8bit");
 
-	      msg.setFrom(new InternetAddress("johndownlaw@gmail.com", "Johnson & Downer Law Firm"));
+	      msg.setFrom(new InternetAddress(address, senderName));
 
-	      msg.setReplyTo(InternetAddress.parse("johndownlaw@gmail.com", false));
+	      msg.setReplyTo(InternetAddress.parse(address, false));
 
 	      msg.setSubject(subject, "UTF-8");
 
@@ -52,5 +56,10 @@ public class EmailUtil {
 	    catch (Exception e) {
 	      e.printStackTrace();
 	    }
+	}
+	
+	public static void setEmailInfo(String email, String pWord) {
+		address = email;
+		password = pWord;
 	}
 }

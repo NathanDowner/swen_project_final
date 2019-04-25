@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
@@ -39,6 +38,7 @@ public class CasesScreen extends JPanel {
 	 * Create the panel.
 	 */
 	public CasesScreen() {
+		System.out.println("using old cases screen");
 		setLayout(null);
 		
 		JLabel lblClients = new JLabel("CASES");
@@ -49,20 +49,6 @@ public class CasesScreen extends JPanel {
 		caseList.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
 //				Main.setCaseViewText(((Case)caseList.getSelectedValue()).toString2());
-				Case o = (Case)caseList.getSelectedValue();
-				//TODO figure out why its opening two slides;
-				JFrame caseViewFrame = new JFrame(o.getCaseTitle());
-				caseViewFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				caseViewFrame.setPreferredSize(Main.popupDim);//TODO pass dimension from main
-				caseViewFrame.getContentPane().add(new CaseView(o));
-				caseViewFrame.pack();
-				caseViewFrame.setVisible(true);
-				
-				
-				
-				
-				
-				
 //				Main.tabbedMain.addTab(o.getClient().getFullName(), new CaseView(o));
 			}
 		});
@@ -113,6 +99,22 @@ public class CasesScreen extends JPanel {
 				}
 			}
 		});
+		
+		JButton btnGoToCase = new JButton("Go to Case");
+		btnGoToCase.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Case o = (Case)caseList.getSelectedValue();
+				//TODO figure out why its opening two slides;
+				JFrame caseViewFrame = new JFrame(o.getCaseTitle());
+				caseViewFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				caseViewFrame.setPreferredSize(Main.popupDim);//TODO pass dimension from main
+				caseViewFrame.getContentPane().add(new CaseView(o));
+				caseViewFrame.pack();
+				caseViewFrame.setVisible(true);
+			}
+		});
+		btnGoToCase.setBounds(228, 165, 122, 42);
+		add(btnGoToCase);
 		
 		loadCases(Main.caseList);
 	}

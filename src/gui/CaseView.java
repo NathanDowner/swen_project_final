@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
 import javax.swing.border.TitledBorder;
@@ -27,10 +28,11 @@ public class CaseView extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JTextField caseSearch;
 	private static JTextPane txtpnCaseData = new JTextPane();//TODO remove static
 	JPanel editsPanel;
 	private Case myCase;
+	public static String path = ".\\src\\Files\\"; 
+	//TODO make path varaible to pass to docPane for folders for each case
 	
 
 	/**
@@ -48,11 +50,6 @@ public class CaseView extends JPanel {
 		lblClients.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblClients.setBounds(28, 10, 122, 37);
 		add(lblClients);
-		
-		caseSearch = new JTextField();
-		caseSearch.setBounds(743, 280, 96, 19);
-		add(caseSearch);
-		caseSearch.setColumns(10);
 		txtpnCaseData.setEditable(false);
 		
 		txtpnCaseData.setBounds(28, 70, 396, 307);
@@ -126,8 +123,9 @@ public class CaseView extends JPanel {
 		btnUpdateStatus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String newStat = promptUser("Enter the new case status.");
+				//TODO change this option to update the change the last action
 				//TODO fix exception when user cancels pop up instead of providing a response
-				String body = String.format("Dear %s,\n\t\tThere has been an update in the status of your case. It is as follows:\n", myCase.getClient().getFullName());
+				String body = String.format("Dear %s,\n\n\t\tThere has been an update in the status of your case. It is as follows:\n", myCase.getClient().getFullName());
 				body += String.format("Previous status: %s\n", myCase.getStatus());
 				myCase.setStatus(newStat);
 				refresh("Status successfully updated.");
@@ -171,12 +169,35 @@ public class CaseView extends JPanel {
 		JButton btnAddFile = new JButton("Add File");
 		btnAddFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JFrame docFrame = new JFrame("New Document");
+				String dName = JOptionPane.showInputDialog("Enter the name of the file");
+				DocPane dp = new DocPane(dName);
+				JFrame docFrame = new JFrame("New Document "+ dName);
+				File f = new File(path+dName+".txt");
 				docFrame.setPreferredSize(Main.popupDim);
 				docFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				docFrame.getContentPane().add(new DocPane());
+				System.out.println("before adding");
+				docFrame.getContentPane().add(dp);
+				System.out.println("after adding");
 				docFrame.pack();
 				docFrame.setVisible(true);
+				myCase.addFile(f);
+				refresh("");
+				
+//				while()
+//				while(true) {
+//					System.out.println("in the loop");
+//					if (dp.isFileCreated()) {
+//						System.out.println("in the if");
+//						myCase.addFile(DocPane.fileName);
+//						System.out.println("file created");
+//						break;
+//					} else {
+//						System.out.println("in the else");
+//					}
+//				}
+//				refresh("File Successfully Added to Client");
+					
+//				myCase.addFile(f);
 			}
 		});
 		btnAddFile.setBounds(6, 150, 122, 21);
@@ -186,16 +207,17 @@ public class CaseView extends JPanel {
 	}
 	
 	private void refresh(String popUpTxt) {
-		setTxtPane(myCase.toString2());
 		editsPanel.setVisible(false);
 		Main.updateFile();
-		JOptionPane.showMessageDialog(this, popUpTxt);
+		setTxtPane(myCase.toString2());
+		if (popUpTxt.length() != 0) {
+			JOptionPane.showMessageDialog(this, popUpTxt);
+		}
 	}
 	
 	private String promptUser(String question) {
 		return JOptionPane.showInputDialog(question);
 	}
-	
 	
 	public static void setTxtPane(String text) {
 		txtpnCaseData.setText(text);

@@ -3,7 +3,7 @@ package gui;
 import javax.swing.JPanel;
 
 import backend.Case;
-import backend.CaseType;
+import backend.types.CaseType;
 import backend.Client;
 
 import javax.swing.DefaultListModel;
@@ -19,7 +19,7 @@ public class AddCaseScreen extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	JList<Client> clientList = new JList<Client>();
+	static JList<Client> clientList = new JList<Client>();
 	JList<CaseType> caseTypeLst = new JList<CaseType>();
 	/**
 	 * Create the panel.
@@ -68,6 +68,14 @@ public class AddCaseScreen extends JPanel {
 		lblSelectAClient.setBounds(265, 52, 93, 13);
 		add(lblSelectAClient);
 
+	}
+	
+	public static void resetClientList() {
+		DefaultListModel<Client> deflm  = new DefaultListModel<Client>();
+		for (Client c: Main.clientList) {
+			deflm.addElement(c);
+		}
+		clientList.setModel(deflm);
 	}
 
 }
