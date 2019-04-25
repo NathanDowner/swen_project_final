@@ -93,6 +93,8 @@ public class GuiController extends JFrame {
 		contentPane.remove(loginScreen);
 		this.setVisible(false);
 		
+		Logger lg = Logger.getInstance();
+		
 		addCaseScreen = new AddCaseScreen(this.clientList);
 		((AddCaseScreen)addCaseScreen).setAddCaseListener(new AddCaseListener() {
 			public void addCaseRequested(AddCaseEvent e) {
@@ -101,7 +103,7 @@ public class GuiController extends JFrame {
 				Case cse = createCase(c, ct);
 				c.addCase(cse);
 				caseList.add(cse);
-				Logger lg = Logger.getInstance();
+				
 				lg.recordActivity(getCurrentUser(), String.format("Case %s was added to Client %s ", cse.getCaseId(), c.getClientId()));
 				((CasesScreen)casesScreen).setListModel(caseList);
 				JOptionPane.showMessageDialog(null, "Case Successfully Added");
@@ -131,6 +133,9 @@ public class GuiController extends JFrame {
 				c.addCase(cse);
 				clientList.add(c);
 				caseList.add(cse);
+				
+				lg.recordActivity(getCurrentUser(), String.format("Created client %s and attached case %s", c.getClientId(), cse.getCaseId()));
+				
 				((ClientsScreen)clientsScreen).setListModel(clientList);
 				((CasesScreen)casesScreen).setListModel(caseList);
 				((AddCaseScreen)addCaseScreen).setClientListModel(clientList);
@@ -148,6 +153,7 @@ public class GuiController extends JFrame {
 				Case cse = createCase(c, type);
 				c.addCase(cse);
 				caseList.add(cse);
+				lg.recordActivity(getCurrentUser(), String.format("Case %s was added to Client %s ", cse.getCaseId(), c.getClientId()));
 				((CasesScreen)casesScreen).setListModel(caseList);
 			}
 		});
@@ -177,6 +183,7 @@ public class GuiController extends JFrame {
 					
 					User u = createUser(fname, lname, username, password, type);
 					userList.add(u);
+					lg.recordActivity(getCurrentUser(), String.format("User %s was created", u.getUsername()));
 				}
 				
 			});
