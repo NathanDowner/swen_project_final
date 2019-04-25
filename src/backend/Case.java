@@ -161,6 +161,14 @@ public class Case implements Serializable{
     	//TODO add out contacts
     	return resp;
     }
+
+    public void setInProgress(boolean b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public boolean isInProgress() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 
 

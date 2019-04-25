@@ -1,4 +1,4 @@
-package finalGui;
+package finalGui.eventListeners;
 
 import java.util.EventListener;
 
