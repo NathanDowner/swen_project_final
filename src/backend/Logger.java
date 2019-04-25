@@ -9,6 +9,7 @@ import java.io.*;
 import java.util.*;
 import java.util.logging.Level;
 import backend.utils.DateUtil;
+import backend.User;
 
 /**
  *
@@ -44,6 +45,11 @@ public class Logger {
         }
     }
     
+    public void recordActivity(User u, String info) {
+        info = u.getUsername() + " " + info;
+        recordActivity(info);
+    }
+    
     public ArrayList<String> getActivityLog(){
         ArrayList<String> actlog = new ArrayList<>();
         try{
@@ -62,15 +68,15 @@ public class Logger {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        Logger tester = Logger.getInstance();
-        tester.recordActivity("It's hot out here");
-        tester.recordActivity("I hope the breeze will pick up");
-        
-        for (String p :tester.getActivityLog()){
-            System.out.println(p);
-        }
-    }
+//    public static void main(String[] args) {
+//        // TODO code application logic here
+//        Logger tester = Logger.getInstance();
+//        tester.recordActivity("It's hot out here");
+//        tester.recordActivity("I hope the breeze will pick up");
+//        
+//        for (String p :tester.getActivityLog()){
+//            System.out.println(p);
+//        }
+//    }
     
 }
