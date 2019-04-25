@@ -16,6 +16,7 @@ import backend.Case;
 import backend.Client;
 import backend.Cost;
 import backend.FileManager;
+import backend.Logger;
 import backend.Phone;
 import backend.User;
 import backend.types.CaseType;
@@ -100,6 +101,8 @@ public class GuiController extends JFrame {
 				Case cse = createCase(c, ct);
 				c.addCase(cse);
 				caseList.add(cse);
+				Logger lg = Logger.getInstance();
+				lg.recordActivity(getCurrentUser(), String.format("Case %s was added to Client %s ", cse.getCaseId(), c.getClientId()));
 				((CasesScreen)casesScreen).setListModel(caseList);
 				JOptionPane.showMessageDialog(null, "Case Successfully Added");
 			}
