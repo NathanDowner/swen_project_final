@@ -163,7 +163,7 @@ public class ClientView extends JPanel {
 		add(optionsPanel);
 		
 		JButton btnEditClient = new JButton("Edit Client");
-		btnEditClient.setBounds(50, 22, 79, 21);
+		btnEditClient.setBounds(39, 22, 108, 21);
 		btnEditClient.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				editsPanel.setVisible(!editsPanel.isVisible());

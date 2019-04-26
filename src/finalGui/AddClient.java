@@ -24,6 +24,8 @@ import com.jgoodies.forms.factories.DefaultComponentFactory;
 
 import backend.Address;
 import backend.Phone;
+import backend.types.AddressType;
+import backend.types.CaseType;
 import backend.types.PhoneNumType;
 import finalGui.eventListeners.AddClientEvent;
 import finalGui.eventListeners.AddClientListener;
@@ -42,7 +44,7 @@ public class AddClient extends JPanel {
 	private JTextField countryField;
 	
 	private ButtonGroup phoneGroup = new ButtonGroup();
-	private JComboBox<String> addressTypeCombo;
+	private JComboBox<AddressType> addressTypeCombo;
 
 	private AddClientListener listener;
 	
@@ -121,10 +123,6 @@ public class AddClient extends JPanel {
 		btnAddAnother.setBounds(154, 171, 103, 32);
 		phoneDetailsPanel.add(btnAddAnother);
 		
-		JCheckBox phoneCheckBox = new JCheckBox("Add Multiple");
-		phoneCheckBox.setBounds(28, 182, 93, 21);
-		phoneDetailsPanel.add(phoneCheckBox);
-		
 		JLabel label_1 = new JLabel("Click add after each address");
 		label_1.setBounds(38, 148, 185, 13);
 		phoneDetailsPanel.add(label_1);
@@ -175,28 +173,33 @@ public class AddClient extends JPanel {
 		lblType.setBounds(31, 203, 90, 19);
 		addressDetailsPanel.add(lblType);
 		
-		addressTypeCombo = new JComboBox<String>();
+		addressTypeCombo = new JComboBox<AddressType>();
 		addressTypeCombo.setBounds(131, 201, 142, 27);
 		addressDetailsPanel.add(addressTypeCombo);
 		
-		DefaultComboBoxModel<String> addressModel = new DefaultComboBoxModel<String>();
-		addressModel.addElement("Home");
-		addressModel.addElement("Work");
+		DefaultComboBoxModel<AddressType> addressModel = new DefaultComboBoxModel<>();
+//		addressModel.addElement("Home");
+//		addressModel.addElement("Work");
+		for (AddressType at: AddressType.values()) {
+			addressModel.addElement(at);
+		}
 		addressTypeCombo.setModel(addressModel);
 		addressTypeCombo.setSelectedIndex(0);
-		
-		JCheckBox addressCheckBox = new JCheckBox("Add Multiple");
-		addressCheckBox.setBounds(28, 269, 93, 21);
-		addressDetailsPanel.add(addressCheckBox);
 		
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				addAddress();
 				//reset the fields
-				line1Field.setText("");
-				line2Field.setText("");
-				countryField.setText("");
+//				String line1 = line1Field.getText(); 
+//				String line2 = line2Field.getText();
+//				String country = countryField.getText();
+//				AddressType type = (AddressType) addressTypeCombo.getSelectedItem();
+//				addresses.add(new Address(type,line1, line2, country));
+//				
+//				line1Field.setText("");
+//				line2Field.setText("");
+//				countryField.setText("");
 			}
 		});
 		btnAdd.setBounds(131, 268, 128, 22);
@@ -263,7 +266,7 @@ public class AddClient extends JPanel {
 		label.setBounds(10, 19, 90, 19);
 		panel_1.add(label);
 		
-		JComboBox caseTypeCombo = new JComboBox();
+		JComboBox<String> caseTypeCombo = new JComboBox<>();
 		caseTypeCombo.setBounds(110, 10, 142, 27);
 		panel_1.add(caseTypeCombo);
 		
@@ -273,6 +276,10 @@ public class AddClient extends JPanel {
 		caseTypeModel.addElement("Commercial");
 		caseTypeModel.addElement("Divorce");
 		caseTypeModel.addElement("Misc");
+		
+//		for (CaseType ct: CaseType.values()) {
+//			caseTypeModel.addElement(ct);
+//		}
 		
 		caseTypeCombo.setModel(caseTypeModel);
 		caseTypeCombo.setSelectedIndex(0);
@@ -372,7 +379,7 @@ public class AddClient extends JPanel {
 		String line1 = line1Field.getText(); 
 		String line2 = line2Field.getText();
 		String country = countryField.getText();
-		String type = (String) addressTypeCombo.getSelectedItem();
+		AddressType type = (AddressType) addressTypeCombo.getSelectedItem();
 		addresses.add(new Address(type,line1, line2, country));
 		
 		line1Field.setText("");
