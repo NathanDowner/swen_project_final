@@ -8,7 +8,7 @@ import backend.types.PhoneNumType;
 
 
 public class Client implements Serializable{
-    private static int clientNo = 0;
+	private static int clientNo = 0;
     private String lname;
     private String clientId;
     private String fname;
@@ -53,7 +53,11 @@ public class Client implements Serializable{
     	this.phones.add(p);
     }
 
-    public String getLname() {
+    public ArrayList<Phone> getPhones() {
+		return phones;
+	}
+
+	public String getLname() {
         return lname;
     }
 
@@ -121,16 +125,25 @@ public class Client implements Serializable{
     }
     
     public void setHomePhone(String num) {
-    	for (Phone p: phones) {
-    		if (p.getType() == PhoneNumType.Home)
-    			p.setNumber(num);
+    	if (phones.size() != 0) {
+    		for (Phone p: phones) {
+    			if (p.getType() == PhoneNumType.Home) {
+    				p.setNumber(num);    			
+    			}
+    		}
+    	} else {
+    		phones.add(new Phone(PhoneNumType.Home, num));
     	}
     }
     
     public void setMobilePhone(String num) {
-    	for (Phone p: phones) {
-    		if (p.getType() == PhoneNumType.Mobile)
-    			p.setNumber(num);
+    	if (phones.size() != 0) {
+    		for (Phone p: phones) {
+    			if (p.getType() == PhoneNumType.Mobile)
+    				p.setNumber(num);
+    		}
+    	} else {
+    		phones.add(new Phone(PhoneNumType.Mobile, num));
     	}
     }
     
@@ -156,14 +169,15 @@ public class Client implements Serializable{
     	
         text = "Name:          " + fname + " " + lname + "\n" +
                 "Id:           " + clientId + "\n";
-        if (phones != null) {
+        if (phones.size() != 0) {
+        	text += "\nPhones:\n------------------------------------------------------------------\n";
         	for (Phone p : phones)
-        		text += p.getType() + "    " + p.getNumber() + "\n";        	
+        		text += p.getType() + ":   " + p.getNumber() + "\n";        	
         }
             
         text += "Email:        " + email + "\n" +
                 "Occupation:   " + occupation + "\n";
-        if (addresses != null) {
+        if (addresses.size() != 0) {
              text += "\nAddresses:\n---------------------------------------------------------------\n";
             for (Address a: addresses)
             	text += a.toString() + "\n\n";
@@ -175,3 +189,4 @@ public class Client implements Serializable{
         return text;
     }
 }
+

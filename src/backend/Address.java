@@ -26,6 +26,13 @@ public class Address implements Serializable{
     	this.line2 = line2;
     	this.country = country;
     }
+    
+    public Address(AddressType type, String line1, String line2, String country) {
+    	this.type = type;
+    	this.line1 = line1;
+    	this.line2 = line2;
+    	this.country = country;
+    }
 
     public Address() {
     }

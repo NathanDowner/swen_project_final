@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import backend.User;
 
 import javax.swing.JPasswordField;
 import java.awt.Font;
@@ -108,6 +107,9 @@ public class LoginScreen extends JPanel{
 				if (loginListener != null) {
 					loginListener.loginSubmitted(login);
 				}
+				usernameField.setText("");
+				passwordField.setText("");
+				
 			}
 		});
 		loginButton.setBounds(924, 602, 110, 33);

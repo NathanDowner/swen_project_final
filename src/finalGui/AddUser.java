@@ -8,14 +8,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -24,11 +22,13 @@ import com.jgoodies.forms.factories.DefaultComponentFactory;
 
 import backend.Address;
 import backend.Phone;
-import backend.types.PhoneNumType;
+import backend.types.UserType;
 import finalGui.eventListeners.AddUserEvent;
 import finalGui.eventListeners.AddUserListener;
 
 public class AddUser extends JPanel {
+
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Address> addresses = new ArrayList<>();
 	private ArrayList<Phone> phones = new ArrayList<>();
 	private JTextField fnameField;
@@ -106,14 +106,17 @@ public class AddUser extends JPanel {
 		lblUserType.setBounds(131, 178, 90, 19);
 		panel.add(lblUserType);
 		
-		JComboBox userTypeCombo = new JComboBox();
+		JComboBox<UserType> userTypeCombo = new JComboBox<>();
 		userTypeCombo.setBounds(231, 171, 142, 29);
 		panel.add(userTypeCombo);
 		
-		DefaultComboBoxModel<String> userTypeModel = new DefaultComboBoxModel<String>();
-		userTypeModel.addElement("Regular Employee");
-		userTypeModel.addElement("Lawyer");
-		userTypeModel.addElement("Admin");
+		DefaultComboBoxModel<UserType> userTypeModel = new DefaultComboBoxModel<>();
+//		userTypeModel.addElement("Regular Employee");
+//		userTypeModel.addElement("Lawyer");
+//		userTypeModel.addElement("Admin");
+		for (UserType ut: UserType.values()) {
+			userTypeModel.addElement(ut);
+		}
 		
 		userTypeCombo.setModel(userTypeModel);
 		userTypeCombo.setSelectedIndex(0);
@@ -125,13 +128,19 @@ public class AddUser extends JPanel {
 				String lname = lnameField.getText();
 				String username = usernameField.getText();
 				String password = passwordField.getText();
-				String userType = (String)userTypeCombo.getSelectedItem();
+				UserType userType = (UserType)userTypeCombo.getSelectedItem();
 				
 				AddUserEvent aue= new AddUserEvent(this, fname, lname, username, password, userType);
 				
 				if (listener != null) {
 					listener.addUserRequested(aue);
 				}
+				
+				fnameField.setText("");
+				lnameField.setText("");
+				usernameField.setText("");
+				passwordField.setText("");
+				JOptionPane.showMessageDialog(AddUser.this, "Successfully created new user!");
 			}
 		});
 		btnAddClient.setBounds(377, 412, 154, 34);

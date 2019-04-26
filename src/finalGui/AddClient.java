@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,11 +23,16 @@ import com.jgoodies.forms.factories.DefaultComponentFactory;
 
 import backend.Address;
 import backend.Phone;
+import backend.types.AddressType;
 import backend.types.PhoneNumType;
 import finalGui.eventListeners.AddClientEvent;
 import finalGui.eventListeners.AddClientListener;
+import java.awt.SystemColor;
+import javax.swing.UIManager;
 
 public class AddClient extends JPanel {
+
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Address> addresses = new ArrayList<>();
 	private ArrayList<Phone> phones = new ArrayList<>();
 	private JTextField fnameField;
@@ -40,12 +44,13 @@ public class AddClient extends JPanel {
 	private JTextField line2Field;
 	private JTextField countryField;
 	
-	private ButtonGroup phoneGroup = new ButtonGroup();
-	private JComboBox<String> addressTypeCombo;
+	private JComboBox<AddressType> addressTypeCombo;
+	private JComboBox<PhoneNumType> phoneTypeCombo;
 
 	private AddClientListener listener;
 	
 	public AddClient() {
+		setBackground(UIManager.getColor("Button.background"));
 		System.out.println("Loaded Add Client Screen");
 		setPreferredSize(new Dimension(900, 600));
 		setLayout(null);
@@ -83,49 +88,36 @@ public class AddClient extends JPanel {
 		phoneNumberField.setBounds(115, 109, 142, 27);
 		phoneDetailsPanel.add(phoneNumberField);
 		
+		JLabel lblPhoneType = new JLabel("Type:");
+		lblPhoneType.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblPhoneType.setBounds(50, 60, 55, 32);
+		phoneDetailsPanel.add(lblPhoneType);
 		
-		JRadioButton rdbtnCell = new JRadioButton("Cell");
-		rdbtnCell.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		rdbtnCell.setBounds(26, 63, 57, 21);
-		rdbtnCell.setSelected(true);
-		rdbtnCell.setActionCommand("cell");
-		phoneDetailsPanel.add(rdbtnCell);
-		
-		JRadioButton rdbtnWork = new JRadioButton("Work");
-		rdbtnWork.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		rdbtnWork.setBounds(99, 63, 81, 21);
-		rdbtnWork.setActionCommand("work");
-		phoneDetailsPanel.add(rdbtnWork);
-		
-		JRadioButton rdbtnHome = new JRadioButton("Home");
-		rdbtnHome.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		rdbtnHome.setBounds(182, 63, 81, 21);
-		rdbtnHome.setActionCommand("home");
-		phoneDetailsPanel.add(rdbtnHome);
-		
-		
-		phoneGroup.add(rdbtnCell);
-		phoneGroup.add(rdbtnWork);
-		phoneGroup.add(rdbtnHome);
-		
-		JButton btnAddAnother = new JButton("Add");
+		JButton btnAddAnother = new JButton("Add Phone");
 		btnAddAnother.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				addPhoneNumber();
-				rdbtnCell.setSelected(true);
+//				rdbtnCell.setSelected(true);
+			
 				
 			}
 		});
 		btnAddAnother.setBounds(154, 171, 103, 32);
 		phoneDetailsPanel.add(btnAddAnother);
 		
-		JCheckBox phoneCheckBox = new JCheckBox("Add Multiple");
-		phoneCheckBox.setBounds(28, 182, 93, 21);
-		phoneDetailsPanel.add(phoneCheckBox);
-		
 		JLabel label_1 = new JLabel("Click add after each address");
 		label_1.setBounds(38, 148, 185, 13);
 		phoneDetailsPanel.add(label_1);
+		
+		phoneTypeCombo = new JComboBox<>();
+		phoneTypeCombo.setBounds(115, 65, 142, 27);
+		phoneDetailsPanel.add(phoneTypeCombo);
+		
+		DefaultComboBoxModel<PhoneNumType> phoneTypeModel = new DefaultComboBoxModel<>();
+		for (PhoneNumType pnt: PhoneNumType.values()) {
+			phoneTypeModel.addElement(pnt);
+		}
+		phoneTypeCombo.setModel(phoneTypeModel);
 		
 		JPanel addressDetailsPanel = new JPanel();
 		addressDetailsPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -173,28 +165,33 @@ public class AddClient extends JPanel {
 		lblType.setBounds(31, 203, 90, 19);
 		addressDetailsPanel.add(lblType);
 		
-		addressTypeCombo = new JComboBox<String>();
+		addressTypeCombo = new JComboBox<AddressType>();
 		addressTypeCombo.setBounds(131, 201, 142, 27);
 		addressDetailsPanel.add(addressTypeCombo);
 		
-		DefaultComboBoxModel<String> addressModel = new DefaultComboBoxModel<String>();
-		addressModel.addElement("Home");
-		addressModel.addElement("Work");
+		DefaultComboBoxModel<AddressType> addressModel = new DefaultComboBoxModel<>();
+//		addressModel.addElement("Home");
+//		addressModel.addElement("Work");
+		for (AddressType at: AddressType.values()) {
+			addressModel.addElement(at);
+		}
 		addressTypeCombo.setModel(addressModel);
 		addressTypeCombo.setSelectedIndex(0);
-		
-		JCheckBox addressCheckBox = new JCheckBox("Add Multiple");
-		addressCheckBox.setBounds(28, 269, 93, 21);
-		addressDetailsPanel.add(addressCheckBox);
 		
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				addAddress();
 				//reset the fields
-				line1Field.setText("");
-				line2Field.setText("");
-				countryField.setText("");
+//				String line1 = line1Field.getText(); 
+//				String line2 = line2Field.getText();
+//				String country = countryField.getText();
+//				AddressType type = (AddressType) addressTypeCombo.getSelectedItem();
+//				addresses.add(new Address(type,line1, line2, country));
+//				
+//				line1Field.setText("");
+//				line2Field.setText("");
+//				countryField.setText("");
 			}
 		});
 		btnAdd.setBounds(131, 268, 128, 22);
@@ -261,7 +258,7 @@ public class AddClient extends JPanel {
 		label.setBounds(10, 19, 90, 19);
 		panel_1.add(label);
 		
-		JComboBox caseTypeCombo = new JComboBox();
+		JComboBox<String> caseTypeCombo = new JComboBox<>();
 		caseTypeCombo.setBounds(110, 10, 142, 27);
 		panel_1.add(caseTypeCombo);
 		
@@ -271,6 +268,10 @@ public class AddClient extends JPanel {
 		caseTypeModel.addElement("Commercial");
 		caseTypeModel.addElement("Divorce");
 		caseTypeModel.addElement("Misc");
+		
+//		for (CaseType ct: CaseType.values()) {
+//			caseTypeModel.addElement(ct);
+//		}
 		
 		caseTypeCombo.setModel(caseTypeModel);
 		caseTypeCombo.setSelectedIndex(0);
@@ -296,21 +297,59 @@ public class AddClient extends JPanel {
 				if(phone != null && phone.length() > 1)
 					addPhoneNumber();
 				
+				ArrayList<Phone> allPhones = new ArrayList<Phone>();
+				allPhones.addAll(phones);
+				ArrayList<Address> allAddresses = new ArrayList<Address>();
+				allAddresses.addAll(addresses);
+				
 				fnameField.setText(null);
 				lnameField.setText(null);
 				emailField.setText(null);
 				occupationField.setText(null);
+				line1Field.setText("");
+				line2Field.setText("");
+				countryField.setText("");
+				phoneNumberField.setText("");
+				
+
 				//TODO add a combobox for id
 				
-				AddClientEvent ace= new AddClientEvent(this, fname, lname, email, occupation, addresses, phones, caseType);
+				AddClientEvent ace= new AddClientEvent(this, fname, lname, email, occupation, allAddresses, allPhones, caseType);
+				
+				
 				
 				if (listener != null) {
 					listener.addClientRequested(ace);
 				}
+				phones.clear();
+				addresses.clear();
 			}
 		});
 		btnAddClient.setBounds(449, 458, 154, 34);
 		add(btnAddClient);
+		
+		JButton btnClearAll = new JButton("Clear All");
+		btnClearAll.setBackground(SystemColor.controlHighlight);
+		btnClearAll.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//clear the arrayLists
+				phones.clear();
+				addresses.clear();
+				
+				//clear the fields
+				fnameField.setText(null);
+				lnameField.setText(null);
+				emailField.setText(null);
+				occupationField.setText(null);
+				
+				line1Field.setText("");
+				line2Field.setText("");
+				countryField.setText("");
+				phoneNumberField.setText("");
+			}
+		});
+		btnClearAll.setBounds(607, 458, 138, 34);
+		add(btnClearAll);
 		
 		
 		
@@ -319,9 +358,10 @@ public class AddClient extends JPanel {
 	
 	private void addPhoneNumber() {
 		String number = phoneNumberField.getText();
-		String typeStr  = phoneGroup.getSelection().getActionCommand();
+//		String typeStr  = phoneGroup.getSelection().getActionCommand();
+		PhoneNumType type = (PhoneNumType)phoneTypeCombo.getSelectedItem();
 		
-		PhoneNumType type = PhoneNumType.strToType(typeStr) ;
+//		PhoneNumType type = PhoneNumType.strToType(typeStr) ;
 		phones.add(new Phone(type, number));
 		
 		phoneNumberField.setText("");
@@ -332,8 +372,12 @@ public class AddClient extends JPanel {
 		String line1 = line1Field.getText(); 
 		String line2 = line2Field.getText();
 		String country = countryField.getText();
-		String type = (String) addressTypeCombo.getSelectedItem();
+		AddressType type = (AddressType) addressTypeCombo.getSelectedItem();
 		addresses.add(new Address(type,line1, line2, country));
+		
+		line1Field.setText("");
+		line2Field.setText("");
+		countryField.setText("");
 	}
 
 	public void setAddClientListener(AddClientListener listener) {

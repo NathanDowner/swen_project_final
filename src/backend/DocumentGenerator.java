@@ -66,14 +66,12 @@ public class DocumentGenerator {
                 }
                 search = "${casetype}";
                 if (text != null && text.contains(search)){
-                    text = text.replace(search,c.getCases().get(0).getCaseType().toString());
-                    //text = text.replace(search,"Conveyancing");
+                    text = text.replace(search,c.getCases().get(0).getCaseType().toString());                    
                     r.setText(text, 0);
                 }
                 search = "${caseSdate}";
                 if (text != null && text.contains(search)){
                     text = text.replace(search,c.getCases().get(0).getStartDate().toString());
-                    //text = text.replace(search,"[need date fam]");
                     r.setText(text, 0);
                 }
                 search = "${occupation}";

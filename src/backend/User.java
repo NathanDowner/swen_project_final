@@ -4,6 +4,8 @@ import java.io.Serializable;
 import backend.types.UserType;
 
 public class User implements Comparable<User>, Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	private String username, password, fname, lname;
 	private UserType type;
 	
