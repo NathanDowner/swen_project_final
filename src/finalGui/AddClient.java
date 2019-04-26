@@ -27,6 +27,7 @@ import backend.Phone;
 import backend.types.PhoneNumType;
 import finalGui.eventListeners.AddClientEvent;
 import finalGui.eventListeners.AddClientListener;
+import javax.swing.SwingConstants;
 
 public class AddClient extends JPanel {
 	private ArrayList<Address> addresses = new ArrayList<>();
@@ -88,7 +89,7 @@ public class AddClient extends JPanel {
 		rdbtnCell.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		rdbtnCell.setBounds(26, 63, 57, 21);
 		rdbtnCell.setSelected(true);
-		rdbtnCell.setActionCommand("cell");
+		rdbtnCell.setActionCommand("Cell");
 		phoneDetailsPanel.add(rdbtnCell);
 		
 		JRadioButton rdbtnWork = new JRadioButton("Work");
@@ -112,7 +113,8 @@ public class AddClient extends JPanel {
 		btnAddAnother.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				addPhoneNumber();
-				rdbtnCell.setSelected(true);
+//				rdbtnCell.setSelected(true);
+			
 				
 			}
 		});
@@ -300,6 +302,14 @@ public class AddClient extends JPanel {
 				lnameField.setText(null);
 				emailField.setText(null);
 				occupationField.setText(null);
+				line1Field.setText("");
+				line2Field.setText("");
+				countryField.setText("");
+				phoneNumberField.setText("");
+				
+				phones.clear();
+				addresses.clear();
+
 				//TODO add a combobox for id
 				
 				AddClientEvent ace= new AddClientEvent(this, fname, lname, email, occupation, addresses, phones, caseType);
@@ -311,6 +321,29 @@ public class AddClient extends JPanel {
 		});
 		btnAddClient.setBounds(449, 458, 154, 34);
 		add(btnAddClient);
+		
+		JButton btnClearAll = new JButton("Clear All");
+		btnClearAll.setBackground(Color.RED);
+		btnClearAll.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//clear the arrayLists
+				phones.clear();
+				addresses.clear();
+				
+				//clear the fields
+				fnameField.setText(null);
+				lnameField.setText(null);
+				emailField.setText(null);
+				occupationField.setText(null);
+				
+				line1Field.setText("");
+				line2Field.setText("");
+				countryField.setText("");
+				phoneNumberField.setText("");
+			}
+		});
+		btnClearAll.setBounds(607, 458, 138, 34);
+		add(btnClearAll);
 		
 		
 		
@@ -334,6 +367,10 @@ public class AddClient extends JPanel {
 		String country = countryField.getText();
 		String type = (String) addressTypeCombo.getSelectedItem();
 		addresses.add(new Address(type,line1, line2, country));
+		
+		line1Field.setText("");
+		line2Field.setText("");
+		countryField.setText("");
 	}
 
 	public void setAddClientListener(AddClientListener listener) {

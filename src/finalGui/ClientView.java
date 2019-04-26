@@ -11,6 +11,7 @@ import java.awt.GridLayout;
 import backend.*;
 import backend.types.AddressType;
 import backend.types.CaseType;
+import backend.types.PhoneNumType;
 
 import javax.swing.JOptionPane;
 import javax.swing.DefaultListModel;
@@ -33,6 +34,8 @@ public class ClientView extends JPanel {
 	private Client myClient;
 	private JPanel editsPanel;
 	private AddCaseListener listener;
+	
+	private JButton btnHomePhone;
 	
 
 	/**
@@ -69,7 +72,7 @@ public class ClientView extends JPanel {
 		btnEmail.setBounds(10, 23, 109, 21);
 		editsPanel.add(btnEmail);
 		
-		JButton btnHomePhone = new JButton("Home Phone");
+		btnHomePhone = new JButton("Home Phone");
 		btnHomePhone.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				myClient.setHomePhone(promptUser("Enter updated home phone number."));
@@ -77,6 +80,22 @@ public class ClientView extends JPanel {
 			}
 		});
 		btnHomePhone.setBounds(10, 54, 109, 21);
+		//check if a phone number exists for the client
+//		boolean foundHome = false;
+//		if (myClient.getPhones().size() == 0) {
+//			foundHome = false;
+//		} else {
+//			
+//		}
+//		for (Phone p: myClient.getPhones()) {
+//			if (p.getType() == PhoneNumType.Home) 
+//				foundHome = true;
+//		}
+//		if (foundHome) {
+//			btnHomePhone.setVisible(true);
+//		} else {
+//			btnHomePhone.setVisible(false);
+//		}
 		editsPanel.add(btnHomePhone);
 		
 		JButton btnMobilePhone = new JButton("Mobile Phone");

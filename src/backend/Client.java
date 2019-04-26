@@ -12,11 +12,11 @@ public class Client implements Serializable{
     private String lname;
     private String clientId;
     private String fname;
-    private ArrayList<Phone> phones;
+    private ArrayList<Phone> phones = new ArrayList<>();
     private Id id;
     private String email;
     private String occupation;
-    private ArrayList<Address> addresses;
+    private ArrayList<Address> addresses = new ArrayList<>();
     private ArrayList<Case> cases = new ArrayList<Case>();
 
     
@@ -52,7 +52,11 @@ public class Client implements Serializable{
     	this.phones.add(p);
     }
 
-    public String getLname() {
+    public ArrayList<Phone> getPhones() {
+		return phones;
+	}
+
+	public String getLname() {
         return lname;
     }
 
@@ -120,16 +124,25 @@ public class Client implements Serializable{
     }
     
     public void setHomePhone(String num) {
-    	for (Phone p: phones) {
-    		if (p.getType() == PhoneNumType.Home)
-    			p.setNumber(num);
+    	if (phones.size() != 0) {
+    		for (Phone p: phones) {
+    			if (p.getType() == PhoneNumType.Home) {
+    				p.setNumber(num);    			
+    			}
+    		}
+    	} else {
+    		phones.add(new Phone(PhoneNumType.Home, num));
     	}
     }
     
     public void setMobilePhone(String num) {
-    	for (Phone p: phones) {
-    		if (p.getType() == PhoneNumType.Mobile)
-    			p.setNumber(num);
+    	if (phones.size() != 0) {
+    		for (Phone p: phones) {
+    			if (p.getType() == PhoneNumType.Mobile)
+    				p.setNumber(num);
+    		}
+    	} else {
+    		phones.add(new Phone(PhoneNumType.Mobile, num));
     	}
     }
     
