@@ -230,7 +230,7 @@ public class AddClientScreen extends JPanel {
 					ArrayList<Address> addresses = new ArrayList<Address>();
 					addresses.add(address);
 					
-					Main.clientList.add(new Client(fname, lname, email, occupation, addresses));
+					//Main.clientList.add(new Client(fname, lname, email, occupation, addresses));
 					JOptionPane.showMessageDialog(null, "Client successfully created.");
 					clearFields();
 					Main.updateFile();

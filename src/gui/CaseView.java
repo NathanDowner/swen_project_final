@@ -127,10 +127,10 @@ public class CaseView extends JPanel {
 				//TODO fix exception when user cancels pop up instead of providing a response
 				String body = String.format("Dear %s,\n\n\t\tThere has been an update in the status of your case. It is as follows:\n", myCase.getClient().getFullName());
 				body += String.format("Previous status: %s\n", myCase.getStatus());
-				myCase.setStatus(newStat);
+				//myCase.setStatus(newStat);
 				refresh("Status successfully updated.");
 				body += String.format("Current status: %s\n", myCase.getStatus());
-				new TLSEmail(myCase.getClient().getEmail(), "Case Status Update", body);
+				//new TLSEmail(myCase.getClient().getEmail(), "Case Status Update", body);
 				
 			}
 		});
