@@ -5,7 +5,8 @@ import java.util.EventObject;
 import backend.types.UserType;
 
 public class AddUserEvent extends EventObject {
-	
+
+	private static final long serialVersionUID = 1L;
 	String fname, lname, username, password;
 	UserType type;
 	

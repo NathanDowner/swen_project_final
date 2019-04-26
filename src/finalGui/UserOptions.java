@@ -11,7 +11,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class UserOptions extends JPanel {
-	
+
+	private static final long serialVersionUID = 1L;
 	private LogoutListener listener;
 
 	/**

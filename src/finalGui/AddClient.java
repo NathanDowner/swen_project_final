@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -25,13 +24,15 @@ import com.jgoodies.forms.factories.DefaultComponentFactory;
 import backend.Address;
 import backend.Phone;
 import backend.types.AddressType;
-import backend.types.CaseType;
 import backend.types.PhoneNumType;
 import finalGui.eventListeners.AddClientEvent;
 import finalGui.eventListeners.AddClientListener;
-import javax.swing.SwingConstants;
+import java.awt.SystemColor;
+import javax.swing.UIManager;
 
 public class AddClient extends JPanel {
+
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Address> addresses = new ArrayList<>();
 	private ArrayList<Phone> phones = new ArrayList<>();
 	private JTextField fnameField;
@@ -43,12 +44,13 @@ public class AddClient extends JPanel {
 	private JTextField line2Field;
 	private JTextField countryField;
 	
-	private ButtonGroup phoneGroup = new ButtonGroup();
 	private JComboBox<AddressType> addressTypeCombo;
+	private JComboBox<PhoneNumType> phoneTypeCombo;
 
 	private AddClientListener listener;
 	
 	public AddClient() {
+		setBackground(UIManager.getColor("Button.background"));
 		System.out.println("Loaded Add Client Screen");
 		setPreferredSize(new Dimension(900, 600));
 		setLayout(null);
@@ -86,30 +88,10 @@ public class AddClient extends JPanel {
 		phoneNumberField.setBounds(115, 109, 142, 27);
 		phoneDetailsPanel.add(phoneNumberField);
 		
-		
-		JRadioButton rdbtnCell = new JRadioButton("Cell");
-		rdbtnCell.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		rdbtnCell.setBounds(26, 63, 57, 21);
-		rdbtnCell.setSelected(true);
-		rdbtnCell.setActionCommand("Cell");
-		phoneDetailsPanel.add(rdbtnCell);
-		
-		JRadioButton rdbtnWork = new JRadioButton("Work");
-		rdbtnWork.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		rdbtnWork.setBounds(99, 63, 81, 21);
-		rdbtnWork.setActionCommand("work");
-		phoneDetailsPanel.add(rdbtnWork);
-		
-		JRadioButton rdbtnHome = new JRadioButton("Home");
-		rdbtnHome.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		rdbtnHome.setBounds(182, 63, 81, 21);
-		rdbtnHome.setActionCommand("home");
-		phoneDetailsPanel.add(rdbtnHome);
-		
-		
-		phoneGroup.add(rdbtnCell);
-		phoneGroup.add(rdbtnWork);
-		phoneGroup.add(rdbtnHome);
+		JLabel lblPhoneType = new JLabel("Type:");
+		lblPhoneType.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblPhoneType.setBounds(50, 60, 55, 32);
+		phoneDetailsPanel.add(lblPhoneType);
 		
 		JButton btnAddAnother = new JButton("Add Phone");
 		btnAddAnother.addActionListener(new ActionListener() {
@@ -126,6 +108,16 @@ public class AddClient extends JPanel {
 		JLabel label_1 = new JLabel("Click add after each address");
 		label_1.setBounds(38, 148, 185, 13);
 		phoneDetailsPanel.add(label_1);
+		
+		phoneTypeCombo = new JComboBox<>();
+		phoneTypeCombo.setBounds(115, 65, 142, 27);
+		phoneDetailsPanel.add(phoneTypeCombo);
+		
+		DefaultComboBoxModel<PhoneNumType> phoneTypeModel = new DefaultComboBoxModel<>();
+		for (PhoneNumType pnt: PhoneNumType.values()) {
+			phoneTypeModel.addElement(pnt);
+		}
+		phoneTypeCombo.setModel(phoneTypeModel);
 		
 		JPanel addressDetailsPanel = new JPanel();
 		addressDetailsPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -337,7 +329,7 @@ public class AddClient extends JPanel {
 		add(btnAddClient);
 		
 		JButton btnClearAll = new JButton("Clear All");
-		btnClearAll.setBackground(Color.RED);
+		btnClearAll.setBackground(SystemColor.controlHighlight);
 		btnClearAll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//clear the arrayLists
@@ -366,9 +358,10 @@ public class AddClient extends JPanel {
 	
 	private void addPhoneNumber() {
 		String number = phoneNumberField.getText();
-		String typeStr  = phoneGroup.getSelection().getActionCommand();
+//		String typeStr  = phoneGroup.getSelection().getActionCommand();
+		PhoneNumType type = (PhoneNumType)phoneTypeCombo.getSelectedItem();
 		
-		PhoneNumType type = PhoneNumType.strToType(typeStr) ;
+//		PhoneNumType type = PhoneNumType.strToType(typeStr) ;
 		phones.add(new Phone(type, number));
 		
 		phoneNumberField.setText("");

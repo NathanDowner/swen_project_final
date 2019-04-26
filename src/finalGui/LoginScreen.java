@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import backend.User;
 
 import javax.swing.JPasswordField;
 import java.awt.Font;

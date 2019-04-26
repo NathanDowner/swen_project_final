@@ -26,14 +26,13 @@ import finalGui.eventListeners.AddCaseListener;
 import finalGui.eventListeners.AddCaseEvent;
 
 public class ClientView extends JPanel {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private static JTextPane txtpnClientData = new JTextPane();
 	private Client myClient;
 	private JPanel editsPanel;
 	private AddCaseListener listener;
+	private User user;
 	
 	private JButton btnHomePhone;
 	
@@ -43,6 +42,9 @@ public class ClientView extends JPanel {
 	 */
 	public ClientView(Client c) {
 		setLayout(null);
+		
+//		Logger lg = Logger.getInstance();
+		
 		//TODO add close btn on client to remove the -1 index of the tab pane
 		JLabel lblClients = new JLabel("CLIENT VIEW");
 		lblClients.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -176,6 +178,10 @@ public class ClientView extends JPanel {
 	
 	public void setAddCaseListener(AddCaseListener listener) {
 		this.listener = listener;
+	}
+	
+	public void setUser(User u) {
+		this.user = u;
 	}
 	
 	private void refresh(String popUpTxt) {

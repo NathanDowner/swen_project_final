@@ -34,6 +34,8 @@ import finalGui.eventListeners.LogoutListener;
 import finalGui.eventListeners.LoginEvent;
 
 public class GuiController extends JFrame {
+
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Client> clientList = new ArrayList<Client>();
 	private ArrayList<Case> caseList = new ArrayList<Case>(); 
 	private ArrayList<User> userList = new ArrayList<>();

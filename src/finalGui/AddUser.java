@@ -8,15 +8,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -25,12 +22,13 @@ import com.jgoodies.forms.factories.DefaultComponentFactory;
 
 import backend.Address;
 import backend.Phone;
-import backend.types.PhoneNumType;
 import backend.types.UserType;
 import finalGui.eventListeners.AddUserEvent;
 import finalGui.eventListeners.AddUserListener;
 
 public class AddUser extends JPanel {
+
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Address> addresses = new ArrayList<>();
 	private ArrayList<Phone> phones = new ArrayList<>();
 	private JTextField fnameField;

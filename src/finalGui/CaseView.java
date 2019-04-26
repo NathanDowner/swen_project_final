@@ -32,18 +32,19 @@ public class CaseView extends JPanel {
 	private JTextPane txtpnCaseData = new JTextPane();//TODO remove static
 	JPanel editsPanel;
 	private Case myCase;
-	public static String path = ".\\src\\Files\\"; 
+	public String path = ".\\src\\Files\\"; 
 	//TODO make path varaible to pass to docPane for folders for each case
+	
+	private User user;
 	
 
 	/**
 	 * Create the panel.
 	 */
-//	public CaseView(Case c) {
-//		CaseView();
-//		this.myCase = c;
-//	}
+
 	public CaseView(Case c) {
+		this.myCase = c;
+		
 		System.out.println("using the real case view");
 		this.setPreferredSize(GuiController.dim);
 		setLayout(null);
@@ -92,7 +93,7 @@ public class CaseView extends JPanel {
 //		scrollPane.setBounds(404, 165, 454, 309);
 //		scrollPane.add(clientHeadings);
 //		add(scrollPane);
-		this.myCase = c;
+		
 		
 		editsPanel = new JPanel();
 		editsPanel.setVisible(false);
@@ -223,6 +224,10 @@ public class CaseView extends JPanel {
 		if (popUpTxt.length() != 0) {
 			JOptionPane.showMessageDialog(this, popUpTxt);
 		}
+	}
+	
+	public void setUser(User u) {
+		this.user = u;
 	}
 	
 	private String promptUser(String question) {
