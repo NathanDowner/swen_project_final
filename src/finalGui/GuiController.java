@@ -15,6 +15,7 @@ import backend.Address;
 import backend.Case;
 import backend.Client;
 import backend.Cost;
+import backend.DocumentGenerator;
 import backend.FileManager;
 import backend.Logger;
 import backend.Phone;
@@ -31,6 +32,9 @@ import finalGui.eventListeners.AddUserEvent;
 import finalGui.eventListeners.AddUserListener;
 import finalGui.eventListeners.LoginListener;
 import finalGui.eventListeners.LoginEvent;
+import java.io.IOException;
+import java.util.logging.Level;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 public class GuiController extends JFrame {
 	private ArrayList<Client> clientList = new ArrayList<Client>();
@@ -179,7 +183,9 @@ public class GuiController extends JFrame {
 					String lname = e.getLname();
 					String username = e.getUsername();
 					String password = e.getPassword();
-					UserType type = UserType.strToType(e.getCaseType());
+                                        String casetype = e.getCaseType();
+                                        System.out.println(casetype);
+					UserType type = UserType.strToType(casetype);
 					
 					User u = createUser(fname, lname, username, password, type);
 					userList.add(u);
@@ -267,11 +273,20 @@ public class GuiController extends JFrame {
 		for (int i=0; i<tData.size(); i++) {
 			cl = tData.get(i);
 			c = new Client(cl[0],cl[1], cl[5]);
-			cse = new Case(c, CaseType.strToType(cl[2]));
+			cse = new Case(c, CaseType.strToType(cl[2]));                        
 			cse.addCost(new Cost(cl[3],Double.parseDouble(cl[4])));
 			caseList.add(cse);
 			c.addCase(cse);
 			clientList.add(c);
+                        if (i == 2){
+                            try {
+                                DocumentGenerator.generateDoc(c);
+                            } catch (IOException ex) {
+                                java.util.logging.Logger.getLogger(GuiController.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (InvalidFormatException ex) {
+                                java.util.logging.Logger.getLogger(GuiController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
 		}
 		
 	}

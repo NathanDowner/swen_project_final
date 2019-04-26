@@ -8,7 +8,7 @@ import backend.types.PhoneNumType;
 
 
 public class Client implements Serializable{
-	private static int clientNo = 0;
+    private static int clientNo = 0;
     private String lname;
     private String clientId;
     private String fname;
@@ -46,6 +46,7 @@ public class Client implements Serializable{
     	this.fname = fname;
     	this.lname = lname;
     	this.email = email;
+        this.occupation = "Unemployed";
     }
     
     public void addPhone(Phone p) {

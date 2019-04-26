@@ -18,9 +18,14 @@ public enum UserType implements Serializable {
 	
 	public static UserType strToType(String s) {
 		for (UserType ut: UserType.values()) {
-			if (s.toLowerCase() == ut.toString().toLowerCase()) {
+			if (s.toLowerCase().equals(ut.toString().toLowerCase())) {
 				return ut;
 			}
 		} return UserType.RegularEmployee; //default
 	}
+        
+        public static void main(String[] args){
+            System.out.println(UserType.strToType(null));
+            //System.out.print(UserType.Lawyer.toString().equals("Lawyer"));
+        }
 }

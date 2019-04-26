@@ -1,1 +1,2 @@
 2019-25-04 (18:14) admin Case 00007 was added to Client 00003 
+2019-25-04 (19:25) [admin] Created client 00007 and attached case 00007
