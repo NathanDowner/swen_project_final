@@ -109,7 +109,7 @@ public class AddClient extends JPanel {
 		phoneGroup.add(rdbtnWork);
 		phoneGroup.add(rdbtnHome);
 		
-		JButton btnAddAnother = new JButton("Add");
+		JButton btnAddAnother = new JButton("Add Phone");
 		btnAddAnother.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				addPhoneNumber();
@@ -298,6 +298,11 @@ public class AddClient extends JPanel {
 				if(phone != null && phone.length() > 1)
 					addPhoneNumber();
 				
+				ArrayList<Phone> allPhones = new ArrayList<Phone>();
+				allPhones.addAll(phones);
+				ArrayList<Address> allAddresses = new ArrayList<Address>();
+				allAddresses.addAll(addresses);
+				
 				fnameField.setText(null);
 				lnameField.setText(null);
 				emailField.setText(null);
@@ -307,16 +312,18 @@ public class AddClient extends JPanel {
 				countryField.setText("");
 				phoneNumberField.setText("");
 				
-				phones.clear();
-				addresses.clear();
 
 				//TODO add a combobox for id
 				
-				AddClientEvent ace= new AddClientEvent(this, fname, lname, email, occupation, addresses, phones, caseType);
+				AddClientEvent ace= new AddClientEvent(this, fname, lname, email, occupation, allAddresses, allPhones, caseType);
+				
+				
 				
 				if (listener != null) {
 					listener.addClientRequested(ace);
 				}
+				phones.clear();
+				addresses.clear();
 			}
 		});
 		btnAddClient.setBounds(449, 458, 154, 34);

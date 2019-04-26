@@ -168,14 +168,15 @@ public class Client implements Serializable{
     	
         text = "Name:          " + fname + " " + lname + "\n" +
                 "Id:           " + clientId + "\n";
-        if (phones != null) {
+        if (phones.size() != 0) {
+        	text += "\nPhones:\n------------------------------------------------------------------\n";
         	for (Phone p : phones)
-        		text += p.getType() + "    " + p.getNumber() + "\n";        	
+        		text += p.getType() + ":   " + p.getNumber() + "\n";        	
         }
             
         text += "Email:        " + email + "\n" +
                 "Occupation:   " + occupation + "\n";
-        if (addresses != null) {
+        if (addresses.size() != 0) {
              text += "\nAddresses:\n---------------------------------------------------------------\n";
             for (Address a: addresses)
             	text += a.toString() + "\n\n";

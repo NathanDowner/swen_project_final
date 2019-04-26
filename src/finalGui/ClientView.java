@@ -119,72 +119,9 @@ public class ClientView extends JPanel {
 		btnOccupation.setBounds(10, 116, 109, 21);
 		editsPanel.add(btnOccupation);
 		
-		JPanel optionsPanel = new JPanel();
-		optionsPanel.setBorder(new TitledBorder(null, "Options", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		optionsPanel.setBounds(540, 395, 181, 84);
-		add(optionsPanel);
-		
-		JButton btnEditClient = new JButton("Edit Client");
-		btnEditClient.setBounds(50, 22, 79, 21);
-		btnEditClient.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				editsPanel.setVisible(!editsPanel.isVisible());
-			}
-		});
-		optionsPanel.setLayout(null);
-		optionsPanel.add(btnEditClient);
-		
-		JButton btnAddTo = new JButton("Add To");
-		btnAddTo.setBounds(50, 53, 79, 21);
-		optionsPanel.add(btnAddTo);
-		
-		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Available Additions", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(679, 70, 110, 207);
-		add(panel);
-		panel.setLayout(null);
-		
 		JButton btnAddCase = new JButton("Add Case");
-		btnAddCase.setBounds(9, 53, 90, 21);
-		panel.add(btnAddCase);
-		
-		JButton btnAddAddress = new JButton("Add Address");
-		btnAddAddress.setBounds(9, 84, 91, 21);
-		panel.add(btnAddAddress);
-		btnAddAddress.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				JPanel addrPrompt = new JPanel();
-				addrPrompt.setLayout(new GridLayout(3,3));
-				
-				JLabel l1 = new JLabel("Address Type:");
-				JTextField addrType = new JTextField();
-				JLabel l2 = new JLabel("Line 1:");
-				JTextField line1 = new JTextField();
-				JLabel l3 = new JLabel("Country:");
-				JTextField country = new JTextField();
-				
-				
-				addrPrompt.add(l1);
-				addrPrompt.add(addrType);
-				addrPrompt.add(l2);
-				addrPrompt.add(line1);
-				addrPrompt.add(l3);
-				addrPrompt.add(country);
-				int result = JOptionPane.showConfirmDialog(null,addrPrompt, 
-						"Enter address info.", JOptionPane.OK_CANCEL_OPTION);
-				if (result == JOptionPane.OK_OPTION) {
-					System.out.println("1\n");
-					System.out.println(line1.getText()+"\n");
-					System.out.println("2");
-					AddressType a = AddressType.strToType(addrType.getText());
-					String b = line1.getText();
-					String c = country.getText();
-					myClient.addAddress(new Address(a,b,c));
-					System.out.println("Got here");
-					refresh("Address Successfully added");
-				}
-			}
-		});
+		btnAddCase.setBounds(10, 147, 109, 21);
+		editsPanel.add(btnAddCase);
 		
 		btnAddCase.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -219,6 +156,21 @@ public class ClientView extends JPanel {
 				}
 			}
 		});
+		
+		JPanel optionsPanel = new JPanel();
+		optionsPanel.setBorder(new TitledBorder(null, "Options", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		optionsPanel.setBounds(540, 395, 181, 60);
+		add(optionsPanel);
+		
+		JButton btnEditClient = new JButton("Edit Client");
+		btnEditClient.setBounds(50, 22, 79, 21);
+		btnEditClient.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				editsPanel.setVisible(!editsPanel.isVisible());
+			}
+		});
+		optionsPanel.setLayout(null);
+		optionsPanel.add(btnEditClient);
 		setTxtPane(c.toString2());
 	}
 	
