@@ -30,6 +30,7 @@ import finalGui.eventListeners.AddClientListener;
 import finalGui.eventListeners.AddUserEvent;
 import finalGui.eventListeners.AddUserListener;
 import finalGui.eventListeners.LoginListener;
+import finalGui.eventListeners.LogoutListener;
 import finalGui.eventListeners.LoginEvent;
 
 public class GuiController extends JFrame {
@@ -44,6 +45,7 @@ public class GuiController extends JFrame {
 	
 	///// Screens /////
 	private LoginScreen loginScreen;
+	private UserOptions userOptionsScreen;
 	private JTabbedPane tabbedScreen;
 	private JPanel clientsScreen, addCaseScreen, casesScreen;
 	private JPanel addClientScreen, addUserScreen;
@@ -87,6 +89,15 @@ public class GuiController extends JFrame {
 	public void updateFile() {
 		FileManager.saveData(caseList, clientList); //TODO have this process done when the software is closed
 		System.out.println("exiting");
+	}
+	
+	public void logout() {
+		contentPane.remove(tabbedScreen);
+		this.setVisible(false);
+		contentPane.add(loginScreen);
+		this.validate();
+		this.pack();
+		this.setVisible(true);
 	}
 	
 	public void openMainPanel() {
@@ -158,6 +169,14 @@ public class GuiController extends JFrame {
 			}
 		});
 		
+		userOptionsScreen = new UserOptions();
+		userOptionsScreen.setLogoutListener(new LogoutListener() {
+			public void logoutRequested() {
+				logout();
+			}
+			
+		});
+		
 		casesScreen = new CasesScreen(this.caseList);
 		((CasesScreen)casesScreen).setSearchListener(new SearchListener() {
 			public void searchTermEmitted(String text) {
@@ -171,6 +190,7 @@ public class GuiController extends JFrame {
 		tabbedScreen.addTab("Add Client", addClientScreen);
 		tabbedScreen.addTab("Add Case", addCaseScreen);
 		
+		
 		if (this.currentUser.getType() == UserType.Admin) {
 			addUserScreen = new AddUser();
 			((AddUser)addUserScreen).setAddUserListener(new AddUserListener() {
@@ -179,7 +199,7 @@ public class GuiController extends JFrame {
 					String lname = e.getLname();
 					String username = e.getUsername();
 					String password = e.getPassword();
-					UserType type = UserType.strToType(e.getCaseType());
+					UserType type = e.getCaseType();
 					
 					User u = createUser(fname, lname, username, password, type);
 					userList.add(u);
@@ -190,6 +210,7 @@ public class GuiController extends JFrame {
 			
 			tabbedScreen.addTab("Add User", addUserScreen);
 		}
+		tabbedScreen.addTab("User Options", userOptionsScreen);
 		contentPane.add(tabbedScreen);
 		this.pack();
 		this.setVisible(true);
@@ -237,7 +258,7 @@ public class GuiController extends JFrame {
 		for (User u: userList) {
 			if (temp.compareTo(u) == 0) {
 				currentUser = u;
-				setTitle(getTitle() + " - " + currentUser);
+				setTitle("Johnson & Downer Client and Case Manager - " + currentUser);
 				return true;
 			}
 		}

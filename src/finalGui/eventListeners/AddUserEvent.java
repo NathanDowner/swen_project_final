@@ -2,13 +2,21 @@ package finalGui.eventListeners;
 
 import java.util.EventObject;
 
+import backend.types.UserType;
+
 public class AddUserEvent extends EventObject {
 	
-	String fname, lname, username, password, caseType;
+	String fname, lname, username, password;
+	UserType type;
 	
 	public AddUserEvent(Object source, String fname, String lname, String username,
-			String password, String caseType) {
+			String password, UserType userType) {
 		super(source);
+		this.fname = fname;
+		this.lname = lname;
+		this.username = username;
+		this.password = password;
+		this.type = userType;
 	}
 
 	public String getFname() {
@@ -27,7 +35,7 @@ public class AddUserEvent extends EventObject {
 		return password;
 	}
 
-	public String getCaseType() {
-		return caseType;
+	public UserType getCaseType() {
+		return type;
 	}
 }

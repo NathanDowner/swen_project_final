@@ -108,6 +108,9 @@ public class LoginScreen extends JPanel{
 				if (loginListener != null) {
 					loginListener.loginSubmitted(login);
 				}
+				usernameField.setText("");
+				passwordField.setText("");
+				
 			}
 		});
 		loginButton.setBounds(924, 602, 110, 33);
